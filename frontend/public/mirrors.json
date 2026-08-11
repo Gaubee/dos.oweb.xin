@@ -1,0 +1,11 @@
+{
+  "mirrors": [
+    {
+      "id": "dos-bin",
+      "name": "dos-bin.zczc.cz",
+      "baseUrl": "https://dos-bin.zczc.cz",
+      "enabled": true,
+      "weight": 100
+    }
+  ]
+}
