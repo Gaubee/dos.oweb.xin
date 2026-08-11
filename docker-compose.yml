@@ -1,0 +1,54 @@
+# docker-compose.yml
+#
+# 用法：
+#   docker compose up -d
+#
+# 服务：
+#   admin  —— Go 管理后端 + admin SPA（admin.game.oweb.xin）
+#   game   —— 公开站 PWA 静态托管（game.oweb.xin，可选——也可直接用 CDN）
+#
+# 环境变量通过 .env 文件配置（参考 .env.example）
+
+services:
+  admin:
+    build: .
+    container_name: dos-admin
+    ports:
+      - "${ADMIN_ADDR:-:7780}"
+    environment:
+      ADMIN_ADDR: ":7780"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-admin}"
+      ADMIN_SECRET: "${ADMIN_SECRET:-}"
+      DATA_DIR: /app/frontend/public
+      ADMIN_DIST: /app/admin/dist
+      # 发布 hook（可选，也可在网页配置）
+      PUBLISH_HOOK: "${PUBLISH_HOOK:-}"
+    volumes:
+      # 持久化数据（游戏数据 + 封面 + 上传的 zip + config）
+      - admin-data:/app/frontend/public
+      # 前端构建产物（packageDist 用）
+      - frontend-dist:/app/frontend/dist
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7780/api/games"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # 公开站静态托管（可选：也可直接用 Cloudflare Pages / nginx 独立部署）
+  game:
+    image: nginx:alpine
+    container_name: dos-game
+    ports:
+      - "${GAME_PORT:-8080}:80"
+    volumes:
+      - frontend-dist:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      admin:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  admin-data:
+  frontend-dist:

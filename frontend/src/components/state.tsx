@@ -1,11 +1,34 @@
 // 加载与错误状态组件。
-import { Loader2, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
-export function Loading({ label = '加载中…' }: { label?: string }) {
+interface LoadingProps {
+  /** 无障碍朗读文本（视觉上不展示，skeleton 已表达加载态） */
+  label?: string;
+  /** skeleton 占位卡片数量，匹配 GameGrid 视觉密度 */
+  count?: number;
+}
+
+/**
+ * Skeleton 加载态：灰色脉冲占位卡，预演 GameGrid 布局，
+ * 比旋转 spinner 更具“内容即将填充”的空间感。
+ */
+export function Loading({ label = '加载中…', count = 12 }: LoadingProps) {
   return (
-    <div className="flex h-40 items-center justify-center text-muted-foreground">
-      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-      {label}
+    <div
+      className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4"
+      role="status"
+      aria-live="polite"
+    >
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="overflow-hidden rounded-lg border">
+          <div className="skeleton aspect-[3/2]" />
+          <div className="space-y-2 p-2.5">
+            <div className="skeleton h-3.5 w-3/4 rounded" />
+            <div className="skeleton h-3 w-1/2 rounded" />
+          </div>
+        </div>
+      ))}
+      <span className="sr-only">{label}</span>
     </div>
   );
 }

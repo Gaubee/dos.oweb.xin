@@ -18,7 +18,7 @@ import {
   type ReactNode,
 } from 'react';
 import { CheckCircle2, XCircle, Info, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
 
 type ToastType = 'success' | 'error' | 'info';
 
@@ -106,20 +106,24 @@ function ToastBubble({ item, onClose }: { item: ToastItem; onClose: () => void }
         border: 'none',
         padding: 0,
       }}
-      className={cn(
-        'flex items-center gap-2 rounded-lg border bg-card px-4 py-3 text-sm shadow-lg',
-        'animate-in slide-in-from-right-5 fade-in duration-300',
-      )}
     >
-      {icons[item.type]}
-      <span className="flex-1 whitespace-nowrap">{item.message}</span>
-      <button
-        onClick={onClose}
-        className="text-muted-foreground hover:text-foreground"
-        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+      {/* 可见气泡：motion 负责入场（从右滑入 + spring）。每个 toast 独立挂载，入场每次触发。 */}
+      <motion.div
+        initial={{ opacity: 0, x: 24 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+        className="flex items-center gap-2 rounded-lg border bg-card px-4 py-3 text-sm shadow-lg"
       >
-        <X className="h-3.5 w-3.5" />
-      </button>
+        {icons[item.type]}
+        <span className="flex-1 whitespace-nowrap">{item.message}</span>
+        <button
+          onClick={onClose}
+          className="text-muted-foreground hover:text-foreground"
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </motion.div>
     </div>
   );
 }

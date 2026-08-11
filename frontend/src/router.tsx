@@ -4,9 +4,9 @@ import {
   createRootRouteWithContext,
   createRoute,
   createRouter,
-  Outlet,
 } from '@tanstack/react-router';
 import { Layout } from '@/components/layout';
+import { PageTransition } from '@/components/page-transition';
 import { HomePage } from '@/routes/index';
 import { GamesPage } from '@/routes/games';
 import { GamePage } from '@/routes/game';
@@ -21,7 +21,7 @@ interface SearchSchema {
 function RootComponent() {
   return (
     <Layout>
-      <Outlet />
+      <PageTransition />
     </Layout>
   );
 }

@@ -25,3 +25,63 @@
       'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
 }
+
+/* ===== 动画 token + 全局微交互 ===== */
+/*
+ * 正交意图（2026-08-10 UI 动画升级）：
+ *   1. 缓动 token（--ease-out / --ease-spring）供 motion 与 CSS 共用
+ *   2. button 通用 press feedback（scale 0.97）
+ *   3. table row hover 平滑背景色过渡
+ *   4. 表格行入场 stagger keyframes（games.tsx 用 inline animation-delay 错峰）
+ *   5. reduced-motion：尊重用户系统偏好，关闭动效
+ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* button press feedback：按下缩放 0.97，松开回弹。
+ * 选择器特异性 (0,1,1) 高于 .transition-colors (0,1,0)，
+ * 故同时接管 color/bg/border 过渡，避免与 tailwind 冲突。 */
+button:not(:disabled) {
+  transition:
+    color 150ms var(--ease-out),
+    background-color 150ms var(--ease-out),
+    border-color 150ms var(--ease-out),
+    transform 120ms var(--ease-out);
+}
+button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* table row hover 平滑背景色过渡 */
+tbody tr {
+  transition: background-color 150ms var(--ease-out);
+}
+
+/* 表格行入场 stagger：games.tsx 通过 inline style animation-delay 错峰 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+tbody tr {
+  animation: fadeInUp 0.3s var(--ease-out) backwards;
+}
+
+/* reduced-motion：尊重 prefers-reduced-motion，关闭动效 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

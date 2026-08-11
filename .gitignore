@@ -3,6 +3,9 @@
 *.exe
 dos-admin
 
+# Docker
+.env
+
 # 前端
 frontend/node_modules/
 frontend/dist/

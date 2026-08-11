@@ -12,6 +12,7 @@
 //     onCancel={() => setConfirmOpen(false)}
 //   />
 import { useEffect, useRef, type ReactNode } from 'react';
+import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 
 interface Props {
@@ -52,29 +53,35 @@ export function ConfirmDialog({
     <dialog
       ref={ref}
       onClose={onCancel}
-      className={`
-        m-auto w-full max-w-sm rounded-lg border bg-card p-0 shadow-xl backdrop:bg-black/50
-        open:animate-in open:fade-in open:zoom-in-95 duration-200
-      `}
+      className="m-auto w-full max-w-sm rounded-lg border bg-card p-0 shadow-xl backdrop:bg-black/50"
     >
-      <div className="p-5">
-        <h2 className="text-base font-semibold">{title}</h2>
-        {description && (
-          <div className="mt-2 text-sm text-muted-foreground">{description}</div>
-        )}
-        <div className="mt-5 flex justify-end gap-2">
-          <Button size="sm" variant="ghost" onClick={onCancel}>
-            {cancelText}
-          </Button>
-          <Button
-            size="sm"
-            variant={variant === 'destructive' ? 'destructive' : 'default'}
-            onClick={onConfirm}
-          >
-            {confirmText}
-          </Button>
-        </div>
-      </div>
+      {/* 仅在 open 时挂载内容：每次打开都重新触发 motion 入场（spring scale 0.95→1 + 淡入）。
+          <dialog> 自身保持挂载由 showModal/close 控制。 */}
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+          className="p-5"
+        >
+          <h2 className="text-base font-semibold">{title}</h2>
+          {description && (
+            <div className="mt-2 text-sm text-muted-foreground">{description}</div>
+          )}
+          <div className="mt-5 flex justify-end gap-2">
+            <Button size="sm" variant="ghost" onClick={onCancel}>
+              {cancelText}
+            </Button>
+            <Button
+              size="sm"
+              variant={variant === 'destructive' ? 'destructive' : 'default'}
+              onClick={onConfirm}
+            >
+              {confirmText}
+            </Button>
+          </div>
+        </motion.div>
+      )}
     </dialog>
   );
 }

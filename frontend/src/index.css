@@ -24,6 +24,82 @@
       -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
       'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
+
+  /*
+   * 通用按压反馈：所有原生 button 轻微回缩。
+   * 注意：shadcn Button（含 asChild 渲染为 <a> 的导航链接）
+   * 由 button.tsx 的 utility class 接管，此处仅兜底原生按钮。
+   */
+  button {
+    transition: transform 120ms var(--ease-out);
+  }
+  button:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+/*
+ * 动画 token：强 ease-out 用于入场/反馈，spring 用于弹跳瞬间。
+ * motion/react 的 transition 也会引用同一曲线，保证 JS/CSS 动效质感统一。
+ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/*
+ * Skeleton shimmer：灰色占位条 + 高光横扫。
+ * 用于 Loading 组件，比 spinner 更具“内容即将填充”的空间感。
+ */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, hsl(var(--foreground)) 8%, transparent),
+    transparent
+  );
+  animation: skeleton-shimmer 1.4s var(--ease-out) infinite;
+}
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes skeleton-pulse {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+ * 降级：尊重 prefers-reduced-motion。
+ * 策略 = “opacity-only”：移除位移/缩放，保留可助理解的淡入淡出与脉冲。
+ * JS 侧（motion/react）由 <MotionConfig reducedMotion="user"> 统一接管，
+ * 此处仅处理纯 CSS 动效（skeleton / 按压）。
+ */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+  .skeleton {
+    animation: skeleton-pulse 1.4s var(--ease-out) infinite alternate;
+  }
+  button,
+  button:active:not(:disabled) {
+    transform: none;
+  }
 }
 
 /* emularity canvas：不可有 border/padding，否则鼠标坐标错位 */

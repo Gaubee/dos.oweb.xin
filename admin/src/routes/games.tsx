@@ -324,10 +324,14 @@ function GamesTable({
           </tr>
         </thead>
         <tbody>
-          {list.map((g) => {
+          {list.map((g, i) => {
             const url = coverUrl(g);
             return (
-              <tr key={g.identifier} className="border-t hover:bg-muted/30">
+              <tr
+                key={g.identifier}
+                className="border-t hover:bg-muted/30"
+                style={{ animationDelay: `${i * 30}ms` }}
+              >
                 <td className="px-3 py-2">
                   {url ? (
                     <BlurhashImage

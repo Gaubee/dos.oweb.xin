@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.chinese-dos-games
+chinese-dos-games
+chinese-dos-games-web
+.zcode
+*.exe
+dos-admin
+frontend/node_modules
+frontend/dist
+admin/node_modules
+admin/dist
+frontend/tsconfig.tsbuildinfo
