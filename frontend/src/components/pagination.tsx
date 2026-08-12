@@ -1,8 +1,8 @@
-// 页码组件：1 ... 4 [5] 6 ... 20 + 上一页/下一页。
-// 用于游戏列表/搜索结果分页。
-import { useMemo } from 'react';
+// 页码组件：1 ... 4 [5] 6 ... 20 + 上一页/下一页 + 跳转输入。
+import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 interface Props {
   page: number;
@@ -11,7 +11,8 @@ interface Props {
 }
 
 export function Pagination({ page, totalPages, onPage }: Props) {
-  // 生成页码：1 ... cur-2 cur-1 cur cur+1 cur+2 ... totalPages
+  const [jump, setJump] = useState('');
+
   const pages = useMemo<(number | string)[]>(() => {
     if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
     const out: (number | string)[] = [1];
@@ -26,15 +27,15 @@ export function Pagination({ page, totalPages, onPage }: Props) {
 
   if (totalPages <= 1) return null;
 
+  const onJump = () => {
+    const n = parseInt(jump, 10);
+    if (Number.isFinite(n) && n >= 1 && n <= totalPages) onPage(n);
+    setJump('');
+  };
+
   return (
-    <div className="flex items-center justify-center gap-1 pt-4">
-      <Button
-        size="icon"
-        variant="outline"
-        className="h-9 w-9"
-        disabled={page <= 1}
-        onClick={() => onPage(page - 1)}
-      >
+    <div className="flex flex-wrap items-center justify-center gap-1.5 pt-4">
+      <Button size="icon" variant="outline" className="h-9 w-9" disabled={page <= 1} onClick={() => onPage(page - 1)}>
         <ChevronLeft className="h-4 w-4" />
       </Button>
       {pages.map((p, i) =>
@@ -52,15 +53,22 @@ export function Pagination({ page, totalPages, onPage }: Props) {
           </Button>
         ),
       )}
-      <Button
-        size="icon"
-        variant="outline"
-        className="h-9 w-9"
-        disabled={page >= totalPages}
-        onClick={() => onPage(page + 1)}
-      >
+      <Button size="icon" variant="outline" className="h-9 w-9" disabled={page >= totalPages} onClick={() => onPage(page + 1)}>
         <ChevronRight className="h-4 w-4" />
       </Button>
+      {totalPages > 5 && (
+        <div className="ml-2 flex items-center gap-1 text-sm text-muted-foreground">
+          <span>跳至</span>
+          <Input
+            value={jump}
+            onChange={(e) => setJump(e.target.value.replace(/\D/g, ''))}
+            onKeyDown={(e) => { if (e.key === 'Enter') onJump(); }}
+            className="h-8 w-14 text-center text-sm"
+            placeholder={String(page)}
+          />
+          <span>页</span>
+        </div>
+      )}
     </div>
   );
 }
