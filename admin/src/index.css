@@ -147,9 +147,7 @@ tbody tr {
 @property --lqip-aaa { syntax: '<integer>'; inherits: false; initial-value: 0; }
 @property --lqip-bbb { syntax: '<integer>'; inherits: false; initial-value: 0; }
 
-.lqip-container {
-  /* 位解包：从 --lqip 整数提取各字段 */
-  --lqip-raw: calc(var(--lqip) + pow(2, 19));
+
 
   /* 6 个灰度值（2bit each） */
   --lqip-ca: mod(round(down, calc(var(--lqip-raw) / pow(2, 18))), 4);
@@ -190,3 +188,14 @@ tbody tr {
     linear-gradient(var(--lqip-base-clr), var(--lqip-base-clr));
   background-size: 100% 100%;
 }
+
+.lqip-container {
+    --lqip-ca: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 18))), 4);
+    --lqip-cb: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 16))), 4);
+    --lqip-cc: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 14))), 4);
+    --lqip-cd: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 12))), 4);
+    --lqip-ce: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 10))), 4);
+    --lqip-cf: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 8))), 4);
+    --lqip-ll: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 6))), 4);
+    --lqip-aaa: mod(round(down, calc((var(--lqip) + pow(2, 19)) / pow(2, 3))), 8);
+    --lqip-bbb: mod(calc(var(--lqip) + pow(2, 19)), 8);

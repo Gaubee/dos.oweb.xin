@@ -48,8 +48,8 @@ func Encode(img image.Image) int {
 	// 1. 提取平均色 → Oklab → 8bit
 	var sumR, sumG, sumB float64
 	var pxCount int
-	for y := bounds.Min.Y; y < bounds.Max.Y; y += 4 { // 采样步长4加速
-		for x := bounds.Min.X; x < bounds.Max.X; x += 4 {
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
 			r, g, b, _ := img.At(x, y).RGBA()
 			sumR += float64(r) / 65535.0
 			sumG += float64(g) / 65535.0
@@ -66,9 +66,9 @@ func Encode(img image.Image) int {
 	// 2. 3×2 灰度网格 → 12bit
 	ca, cb, cc, cd, ce, cf := grid3x2Greyscale(img, bounds, w, h)
 
-	// 3. 位打包
+	// 3. 位打包 + 减去 2^19 偏移（CSS 解码时 +pow(2,19) 恢复）
 	result := ca<<18 | cb<<16 | cc<<14 | cd<<12 | ce<<10 | cf<<8 | ll<<6 | aaa<<3 | bbb
-	return result
+	return result - (1 << 19)
 }
 
 // rgbToOklabBits 把 sRGB [0,1] 转 Oklab，量化为 8bit（2+3+3）。
@@ -110,19 +110,25 @@ func rgbToOklabBits(r, g, b float64) (ll, aaa, bbb int) {
 //	ca | cb | cc
 //	cd | ce | cf
 func grid3x2Greyscale(img image.Image, bounds image.Rectangle, w, h int) (ca, cb, cc, cd, ce, cf int) {
-	cells := [6]float64{}
-	counts := [6]int{}
-
 	cellW := w / 3
+	if cellW < 1 {
+		cellW = 1
+	}
 	cellH := h / 2
+	if cellH < 1 {
+		cellH = 1
+	}
 
-	for y := bounds.Min.Y; y < bounds.Max.Y; y += 2 {
-		for x := bounds.Min.X; x < bounds.Max.X; x += 2 {
+	var cells [6]float64
+	var counts [6]int
+
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
 			r, g, b, _ := img.At(x, y).RGBA()
 			brightness := (0.299*float64(r) + 0.587*float64(g) + 0.114*float64(b)) / 65535.0
 
-			cx := (x - bounds.Min.X) / max(cellW, 1)
-			cy := (y - bounds.Min.Y) / max(cellH, 1)
+			cx := (x - bounds.Min.X) / cellW
+			cy := (y - bounds.Min.Y) / cellH
 			if cx > 2 {
 				cx = 2
 			}
@@ -136,7 +142,7 @@ func grid3x2Greyscale(img image.Image, bounds image.Rectangle, w, h int) (ca, cb
 	}
 
 	// 量化：CSS 是 X/3*60%+20%，即 [0.2,0.8] → encode: (v-0.2)/0.6*3
-	result := [6]int{}
+	var result [6]int
 	for i := 0; i < 6; i++ {
 		if counts[i] > 0 {
 			avg := cells[i] / float64(counts[i])
@@ -163,11 +169,4 @@ func clampRound(v float64, min, max int) int {
 		return max
 	}
 	return r
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
