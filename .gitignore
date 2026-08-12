@@ -19,7 +19,11 @@ admin/dist/
 .vscode/
 .idea/
 .zcode/
+.reasonix/
 
 # 上游数据源（只读引用，不纳入本仓库）
 /chinese-dos-games/
 /chinese-dos-games-web/
+
+# 本地迁移出来的 lqip-blurhash 片段库（独立 git 仓库，见 https://github.com/Gaubee/lqip-blurhash）
+/lqip-blurhash/
