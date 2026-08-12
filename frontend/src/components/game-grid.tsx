@@ -28,7 +28,7 @@ export function GameGrid({ games }: { games: GameSummary[] }) {
   }
   return (
     <motion.div
-      className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4"
+      className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] sm:gap-4"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
