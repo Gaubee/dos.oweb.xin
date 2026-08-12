@@ -8,7 +8,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Plus, Pencil, Trash2, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Plus, Pencil, Trash2, EyeOff, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -119,7 +119,14 @@ export function GamesListPage() {
   const removeMutation = useMutation({
     mutationFn: (id: string) => games.remove(id),
     onSuccess: () => {
-      resetFuseIndex(); // 数据变更后重建索引
+      resetFuseIndex();
+      void queryClient.invalidateQueries({ queryKey: ['admin-games-all'] });
+    },
+  });
+  const hideMutation = useMutation({
+    mutationFn: (id: string) => games.batchHidden([id], true),
+    onSuccess: () => {
+      resetFuseIndex();
       void queryClient.invalidateQueries({ queryKey: ['admin-games-all'] });
     },
   });
@@ -165,6 +172,12 @@ export function GamesListPage() {
 
   const onDelete = (g: RawGame) => {
     setDeleteTarget(g); // 打开确认对话框
+  };
+  const onHide = (g: RawGame) => {
+    hideMutation.mutate(g.identifier, {
+      onSuccess: () => toast.success(`已下架「${g.name['zh-Hans'] || g.identifier}」`),
+      onError: (err) => toast.error(err instanceof ApiError ? err.message : '下架失败'),
+    });
   };
   const confirmDelete = () => {
     if (!deleteTarget) return;
@@ -265,7 +278,7 @@ export function GamesListPage() {
       ) : error ? (
         <ErrorState message={error instanceof ApiError ? error.message : '加载失败'} />
       ) : (
-        <GamesTable games={pageItems} onDelete={onDelete} onEdit={(g) => void navigate({ to: '/games/$id/edit', params: { id: g.identifier } })} />
+        <GamesTable games={pageItems} onDelete={onDelete} onHide={onHide} onEdit={(g) => void navigate({ to: '/games/$id/edit', params: { id: g.identifier } })} />
       )}
 
       {/* 分页器 */}
@@ -297,10 +310,12 @@ export function GamesListPage() {
 function GamesTable({
   games: list,
   onDelete,
+  onHide,
   onEdit,
 }: {
   games: RawGame[];
   onDelete: (g: RawGame) => void;
+  onHide: (g: RawGame) => void;
   onEdit: (g: RawGame) => void;
 }) {
   if (list.length === 0) {
@@ -375,6 +390,9 @@ function GamesTable({
                   <div className="flex justify-end gap-1">
                     <Button size="icon" variant="ghost" className="h-8 w-8" title="编辑" onClick={() => onEdit(g)}>
                       <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button size="icon" variant="ghost" className="h-8 w-8" title="下架" onClick={() => onHide(g)}>
+                      <EyeOff className="h-4 w-4" />
                     </Button>
                     <Button size="icon" variant="ghost" className="h-8 w-8 text-destructive hover:text-destructive" title="删除" onClick={() => onDelete(g)}>
                       <Trash2 className="h-4 w-4" />

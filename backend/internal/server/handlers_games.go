@@ -23,11 +23,10 @@ import (
 
 // ———— 公开接口 ————
 
-// GET /api/games?q=  游戏列表（可带搜索关键词）。
-// 返回全量（1898 条），前端本地分页/筛选。q 非空时做服务端过滤。
+// GET /api/games?q=  游戏列表（仅返回未下架的游戏）。
 func (s *Server) handleListGames(c *gin.Context) {
 	q := strings.ToLower(strings.TrimSpace(c.Query("q")))
-	all := s.store.ListGames()
+	all := s.store.ListVisibleGames() // 公开 API 过滤下架
 	if q != "" {
 		filtered := make([]model.RawGame, 0)
 		for _, g := range all {
@@ -41,11 +40,11 @@ func (s *Server) handleListGames(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"total": len(all), "games": all})
 }
 
-// GET /api/games/:identifier  单游戏详情。
+// GET /api/games/:identifier  单游戏详情（下架游戏返回 404）。
 func (s *Server) handleGetGame(c *gin.Context) {
 	id := c.Param("identifier")
 	g, ok := s.store.GetGame(id)
-	if !ok {
+	if !ok || g.Hidden {
 		c.JSON(http.StatusNotFound, gin.H{"error": "游戏不存在", "identifier": id})
 		return
 	}

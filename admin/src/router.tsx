@@ -19,6 +19,7 @@ import { GameNewPage } from '@/routes/game-new';
 import { FeaturedPage } from '@/routes/featured';
 import { MirrorsPage } from '@/routes/mirrors';
 import { TypesPage } from '@/routes/types';
+import { HiddenPage } from '@/routes/hidden';
 import { PublishPage } from '@/routes/publish';
 
 function RootComponent() {
@@ -115,6 +116,12 @@ const publishRoute = createRoute({
   component: PublishPage,
 });
 
+const hiddenRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/hidden',
+  component: HiddenPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
@@ -126,6 +133,7 @@ const routeTree = rootRoute.addChildren([
     featuredRoute,
     mirrorsRoute,
     typesRoute,
+    hiddenRoute,
     publishRoute,
   ]),
 ]);

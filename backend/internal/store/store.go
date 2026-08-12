@@ -113,7 +113,43 @@ func (s *Store) writeJSON(name string, v any) error {
 
 // —— Games CRUD ——
 
-// ListGames 返回全部游戏（map 副本，调用方可安全改）。
+// ListVisibleGames 返回未下架的游戏（公开 API 用）。
+func (s *Store) ListVisibleGames() []model.RawGame {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := make([]model.RawGame, 0, len(s.games.Games))
+	for _, g := range s.games.Games {
+		if !g.Hidden {
+			out = append(out, g)
+		}
+	}
+	return out
+}
+
+// ListAllGames 返回全部游戏（含下架，管理后台用）。
+func (s *Store) ListAllGames() []model.RawGame {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := make([]model.RawGame, 0, len(s.games.Games))
+	for _, g := range s.games.Games {
+		out = append(out, g)
+	}
+	return out
+}
+
+// SetHidden 批量设置游戏的 hidden 状态。
+func (s *Store) SetHidden(ids []string, hidden bool) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for _, id := range ids {
+		if g, ok := s.games.Games[id]; ok {
+			g.Hidden = hidden
+			s.games.Games[id] = g
+		}
+	}
+}
+
+// ListGames 返回全部游戏（兼容旧调用，含下架）。
 func (s *Store) ListGames() []model.RawGame {
 	s.mu.RLock()
 	defer s.mu.RUnlock()

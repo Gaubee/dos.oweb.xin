@@ -16,6 +16,7 @@ export interface RawGame {
   coverFilename?: string;
   lqip?: number;
   keywords?: string[];
+  hidden?: boolean;
   img?: string;
   cdrom?: string;
   floppy?: string;

@@ -48,6 +48,11 @@ export const games = {
     request<RawGame>(`/admin/games/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(g) }),
   remove: (id: string) =>
     request<{ ok: boolean }>(`/admin/games/${encodeURIComponent(id)}`, { method: 'DELETE' }),
+  batchHidden: (ids: string[], hidden: boolean) =>
+    request<{ ok: boolean; count: number }>(`/admin/games/batch-hidden`, {
+      method: 'PUT',
+      body: JSON.stringify({ ids, hidden }),
+    }),
   uploadCover: async (id: string, file: File) => {
     const form = new FormData();
     form.append('file', file);

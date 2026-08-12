@@ -34,6 +34,7 @@ type RawGame struct {
 	Cdrom         string            `json:"cdrom,omitempty"`
 	Floppy        string            `json:"floppy,omitempty"`
 	ReleaseYear   int               `json:"releaseYear,omitempty"`
+	Hidden        bool              `json:"hidden,omitempty"` // 下架（公开 API 不返回）
 	Links         map[string]string `json:"links,omitempty"`
 	Keymaps       map[string]string `json:"keymaps,omitempty"`
 	Cheats        map[string]string `json:"cheats,omitempty"`

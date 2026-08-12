@@ -82,6 +82,7 @@ func (s *Server) Router() *gin.Engine {
 		admin.PUT("/games/:identifier", s.handleUpdateGame)
 		admin.DELETE("/games/:identifier", s.handleDeleteGame)
 		admin.POST("/games/:identifier/cover", s.handleUploadCover)
+		admin.PUT("/games/batch-hidden", s.handleBatchHidden) // 批量下架/上架
 		admin.PUT("/featured", s.handleSetFeatured)
 		admin.GET("/mirrors", s.handleAdminGetMirrors)
 		admin.PUT("/mirrors", s.handleSetMirrors)

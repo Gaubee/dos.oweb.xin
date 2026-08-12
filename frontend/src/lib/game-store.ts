@@ -36,6 +36,7 @@ interface RawGame {
   cdrom?: string;
   floppy?: string;
   releaseYear?: number;
+  hidden?: boolean;
   links?: Record<string, string>;
   keymaps?: Record<string, string>;
   cheats?: Record<string, string>;
@@ -77,6 +78,7 @@ async function load(): Promise<StoreData> {
   const ordered: string[] = [];
 
   for (const [id, raw] of Object.entries(data.games)) {
+    if (raw.hidden) continue; // 过滤下架游戏
     const game = toDTO(raw);
     games.set(id, game);
     ordered.push(id);
