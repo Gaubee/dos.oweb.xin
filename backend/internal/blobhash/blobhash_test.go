@@ -1,4 +1,4 @@
-// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+// 意图（记录时间：2026-08-12 15:44 CST；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
 //  1. 锁定 20bit CSS 位协议与主色方向。
 //  2. 防止小面积高饱和色和低对比 min/max 拉伸回归。
 //  3. 以指定真实封面验证视觉编码边界。
@@ -137,6 +137,22 @@ func TestEncode_DominantColourFavoursProminentArea(t *testing.T) {
 	}
 }
 
+func TestEncode_DominantColourDoesNotPromoteSaturatedAccent(t *testing.T) {
+	// 大面积粉暖色的色度低于蓝色强调。候选必须同时考虑覆盖面积，不能只按
+	// 色度选择，否则单格蓝色会取代视觉主体。
+	softWarm := color.RGBA{220, 150, 145, 255}
+	blueAccent := color.RGBA{20, 30, 220, 255}
+	img := cellImg([6]color.RGBA{
+		softWarm, softWarm, softWarm,
+		softWarm, softWarm, blueAccent,
+	})
+
+	bits := unpackLQIP(t, Encode(img))
+	if bits.aaa < 4 || bits.bbb < 3 {
+		t.Errorf("主色 a=%d b=%d，期望保留大面积暖粉而非蓝色强调", bits.aaa, bits.bbb)
+	}
+}
+
 func TestEncode_LowContrastGridKeepsHeadroom(t *testing.T) {
 	// 格间仅相差 4/255。旧 min/max 归一化会将其放大到 0 和 3。
 	// 低对比图片应保持可辨差异，但不应伪造最大对比度。
@@ -157,6 +173,40 @@ func TestEncode_LowContrastGridKeepsHeadroom(t *testing.T) {
 	}
 	if maxValue-minValue > 1 {
 		t.Errorf("低对比网格被拉伸为 %d 到 %d，期望量化跨度不超过 1", minValue, maxValue)
+	}
+}
+
+func TestLQIP_SignedPackingContract(t *testing.T) {
+	// 固定字段向量直接锁定 CSS 的 +2^19 偏移和 MSB→LSB 位布局。
+	packed := packLQIP(
+		[6]float64{0, 0.3, 0.6, 0, 0.3, 0.6},
+		0.5,
+		2,
+		4,
+		3,
+	)
+	const expectedPacked = 0b00_10_11_00_10_11_10_100_011
+	if packed != expectedPacked {
+		t.Fatalf("packed=%b，期望 %b", packed, expectedPacked)
+	}
+
+	bits := unpackLQIP(t, packed-lqipOffset)
+	if bits.grid != [6]int{0, 2, 3, 0, 2, 3} || bits.ll != 2 || bits.aaa != 4 || bits.bbb != 3 {
+		t.Errorf("解包字段=%+v，不符合固定 CSS 位布局", bits)
+	}
+}
+
+func TestOklabBits_CSSInverse(t *testing.T) {
+	// CSS 反解每一个合法基色字段后，Go 必须量化回相同字段。
+	for ll := range 4 {
+		for aaa := range 8 {
+			for bbb := range 8 {
+				gotLL, gotAAA, gotBBB := oklabToBits(bitsToOklab(ll, aaa, bbb))
+				if gotLL != ll || gotAAA != aaa || gotBBB != bbb {
+					t.Errorf("(%d,%d,%d) CSS 反解后重新量化为 (%d,%d,%d)", ll, aaa, bbb, gotLL, gotAAA, gotBBB)
+				}
+			}
+		}
 	}
 }
 
@@ -193,6 +243,19 @@ func TestEncode_ReferenceCovers(t *testing.T) {
 			t.Errorf("灰度网格=%v，期望保留暗图层次", bits.grid)
 		}
 	})
+}
+
+func TestFromFile_DecodesGIFWithJPGFilename(t *testing.T) {
+	// 数据集中的该封面实际是 GIF，但历史文件名为 .jpg。image.Decode 必须依赖
+	// 内容签名而非扩展名，保证全量生成不会遗漏它。
+	path := filepath.Join("..", "..", "..", "frontend", "public", "covers", "转校生-天使们的午后", "cover.jpg")
+	lqip, err := FromFile(path)
+	if err != nil {
+		t.Fatalf("GIF 内容的 .jpg 封面解码失败: %v", err)
+	}
+	if lqip < -lqipOffset || lqip >= lqipOffset {
+		t.Errorf("lqip=%d 超出有符号 20bit 范围", lqip)
+	}
 }
 
 func TestEncode_DarkImage(t *testing.T) {

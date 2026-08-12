@@ -1,4 +1,4 @@
-// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+// 意图（记录时间：2026-08-12 15:44 CST；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
 //  1. 从图像采样构建有界 Oklab 调色板。
 //  2. 用覆盖面积和色度共同选择代表性基色。
 package blobhash
@@ -11,7 +11,7 @@ import (
 const (
 	paletteSampleLimit    = 4096
 	paletteLLevels        = 8
-	paletteABLevels       = 12
+	paletteABLevels       = 8
 	minimumColourCoverage = 0.04
 	minimumColourChroma   = 0.03
 )

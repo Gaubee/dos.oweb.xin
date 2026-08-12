@@ -1,4 +1,4 @@
-// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+// 意图（记录时间：2026-08-12 15:44 CST；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
 //  1. 解码图像文件为 image.Image。
 //  2. 编排 LQIP 分析并保持固定的 20bit 传输格式。
 package blobhash
@@ -6,6 +6,7 @@ package blobhash
 import (
 	"fmt"
 	"image"
+	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 	"os"

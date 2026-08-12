@@ -1,4 +1,4 @@
-// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+// 意图（记录时间：2026-08-12 15:44 CST；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
 //  1. 将图像亮度降采样为固定的 3×2 CSS 渐变布局。
 //  2. 量化相对 Oklab 亮度，避免 min/max 放大噪声。
 package blobhash

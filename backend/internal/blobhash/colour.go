@@ -1,4 +1,4 @@
-// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+// 意图（记录时间：2026-08-12 15:44 CST；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
 //  1. 将 sRGB 像素转换为 CSS 解码器使用的 Oklab。
 //  2. 量化和反量化固定的 2+3+3 基色字段。
 package blobhash
