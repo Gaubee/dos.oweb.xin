@@ -15,7 +15,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lithammer/fuzzysearch/fuzzy"
 
-	"github.com/gaubee/dos.oweb.xin/backend/internal/blurhash"
+	"github.com/gaubee/dos.oweb.xin/backend/internal/blobhash"
 	"github.com/gaubee/dos.oweb.xin/backend/internal/pinyin"
 
 	"github.com/gaubee/dos.oweb.xin/backend/internal/model"
@@ -146,12 +146,12 @@ func (s *Server) handleUploadCover(c *gin.Context) {
 	g, _ := s.store.GetGame(id)
 	g.CoverFilename = versioned
 
-	// 计算 blurhash（封面加载前的模糊占位）
+	// 计算 LQIP 整数（CSS-only 占位）
 	coverPath := filepath.Join(coverDir, coverName)
-	if hash, err := blurhash.FromFile(coverPath); err == nil {
-		g.CoverBlurhash = hash
+	if lqip, err := blobhash.FromFile(coverPath); err == nil {
+		g.Lqip = lqip
 	} else {
-		fmt.Fprintf(os.Stderr, "⚠ 计算 blurhash 失败 %s: %v\n", id, err)
+		fmt.Fprintf(os.Stderr, "⚠ 计算 LQIP 失败 %s: %v\n", id, err)
 	}
 
 	_ = s.store.UpdateGame(id, g)
@@ -159,7 +159,7 @@ func (s *Server) handleUploadCover(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"ok":            true,
 		"coverFilename": versioned,
-		"coverBlurhash": g.CoverBlurhash,
+		"lqip":          g.Lqip,
 		"coverUrl":      fmt.Sprintf("/covers/%s/%s", id, coverName),
 	})
 }

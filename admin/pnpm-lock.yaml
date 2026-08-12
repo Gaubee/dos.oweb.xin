@@ -14,9 +14,6 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.95.0
         version: 1.170.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      blurhash:
-        specifier: ^2.0.5
-        version: 2.0.5
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -662,9 +659,6 @@ packages:
     resolution: {integrity: sha512-k9HNuUVMlqVjQ9UHzfPjIqiDbWw7WqT1AoT7GL8VwvF3r0ZfArtgiSPAlmupyNquNgOJHTuH4CKYf8ttMTWBTQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-
-  blurhash@2.0.5:
-    resolution: {integrity: sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==}
 
   browserslist@4.28.8:
     resolution: {integrity: sha512-V2NpofLblG64mfOtSgDhOJESZEGogzDMBv/q+W6oc4LXWP/q75eOXoOaaOu1EOadB9U4Bwx/e0yzbvwKH8zalA==}
@@ -1492,8 +1486,6 @@ snapshots:
       - supports-color
 
   baseline-browser-mapping@2.11.13: {}
-
-  blurhash@2.0.5: {}
 
   browserslist@4.28.8:
     dependencies:

@@ -1,67 +1,36 @@
-// BlurhashImage：blurhash 占位 + 真实图直接显示。
-// 基于 canvas putImageData 直接渲染像素（不用 toDataURL 避免 JPEG 编码开销），
-// CSS 放大 + blur 实现模糊占位效果。
-import { useEffect, useRef } from 'react';
-import { decode } from 'blurhash';
+// LqipImage：纯 CSS LQIP 占位 + 真实图显示。
+// 参考 leanrada.com/notes/css-only-lqip——零 JS、零 canvas、零 toDataURL。
+//
+// 原理：Go 端预计算 20bit 整数（Oklab 主色 + 3×2 灰度网格），
+// 设为 CSS 自定义属性 --lqip，CSS 用 mod()/pow()/round() 解码 + radial-gradient 渲染。
+// 真实图叠在上层，加载完自然覆盖。
 import { cn } from '@/lib/utils';
-
-// 全局缓存：blurhash 字符串 → ImageData（同一 hash 只解码一次）
-const blurCache = new Map<string, ImageData>();
-
-function getBlurData(hash: string, w: number, h: number): ImageData | null {
-  const key = `${hash}:${w}x${h}`;
-  if (blurCache.has(key)) return blurCache.get(key)!;
-  try {
-    const pixels = decode(hash, w, h);
-    const data = new ImageData(new Uint8ClampedArray(pixels), w, h);
-    blurCache.set(key, data);
-    return data;
-  } catch {
-    return null;
-  }
-}
 
 interface Props {
   src?: string;
-  blurhash?: string;
+  /** Go 端预计算的 20bit LQIP 整数 */
+  lqip?: number;
   aspect?: string;
   alt: string;
   className?: string;
 }
 
-export function BlurhashImage({ src, blurhash, aspect = '3/2', alt, className }: Props) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    if (!blurhash || !canvasRef.current) return;
-    const w = 32;
-    const h = Math.round(w / parseAspect(aspect));
-    const data = getBlurData(blurhash, w, h);
-    if (!data) return;
-    const ctx = canvasRef.current.getContext('2d');
-    if (!ctx) return;
-    canvasRef.current.width = w;
-    canvasRef.current.height = h;
-    ctx.putImageData(data, 0, 0);
-  }, [blurhash, aspect]);
+export function BlurhashImage({ src, lqip, aspect = '3/2', alt, className }: Props) {
+  if (!src && !lqip) {
+    return <div className={cn('bg-muted', className)} style={{ aspectRatio: aspect }} />;
+  }
 
   return (
-    <div className={cn('relative overflow-hidden bg-muted', className)} style={{ aspectRatio: aspect }}>
-      {blurhash && (
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 h-full w-full scale-110"
-          style={{ filter: 'blur(8px)', imageRendering: 'auto' }}
-        />
-      )}
+    <div
+      className={cn('lqip-container relative overflow-hidden', className)}
+      style={{
+        '--lqip': lqip ?? 0,
+        aspectRatio: aspect,
+      } as React.CSSProperties}
+    >
       {src && (
         <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-contain" />
       )}
     </div>
   );
-}
-
-function parseAspect(aspect: string): number {
-  const [w, h] = aspect.split('/').map(Number);
-  return h ? w / h : 1.5;
 }

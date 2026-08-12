@@ -85,3 +85,48 @@ tbody tr {
     scroll-behavior: auto !important;
   }
 }
+.lqip-container {
+  background-color: hsl(var(--muted));
+
+  /* 位解包：从 --lqip 整数提取各字段 */
+  --lqip-raw: calc(var(--lqip) + pow(2, 19));
+
+  /* 6 个灰度值（2bit each）→ HSL 颜色 */
+  --lqip-ca: mod(round(down, calc(var(--lqip-raw) / pow(2, 18))), 4);
+  --lqip-cb: mod(round(down, calc(var(--lqip-raw) / pow(2, 16))), 4);
+  --lqip-cc: mod(round(down, calc(var(--lqip-raw) / pow(2, 14))), 4);
+  --lqip-cd: mod(round(down, calc(var(--lqip-raw) / pow(2, 12))), 4);
+  --lqip-ce: mod(round(down, calc(var(--lqip-raw) / pow(2, 10))), 4);
+  --lqip-cf: mod(round(down, calc(var(--lqip-raw) / pow(2, 8))), 4);
+
+  /* 主色 Oklab 分量（2bit L + 3bit a + 3bit b） */
+  --lqip-ll: mod(round(down, calc(var(--lqip-raw) / pow(2, 6))), 4);
+  --lqip-aaa: mod(round(down, calc(var(--lqip-raw) / pow(2, 3))), 8);
+  --lqip-bbb: mod(var(--lqip-raw), 8);
+
+  /* 灰度 → HSL（2bit 0-3 → 20%-80% lightness） */
+  --lqip-ca-clr: hsl(0 0% calc(var(--lqip-ca) / 3 * 60% + 20%));
+  --lqip-cb-clr: hsl(0 0% calc(var(--lqip-cb) / 3 * 60% + 20%));
+  --lqip-cc-clr: hsl(0 0% calc(var(--lqip-cc) / 3 * 60% + 20%));
+  --lqip-cd-clr: hsl(0 0% calc(var(--lqip-cd) / 3 * 60% + 20%));
+  --lqip-ce-clr: hsl(0 0% calc(var(--lqip-ce) / 3 * 60% + 20%));
+  --lqip-cf-clr: hsl(0 0% calc(var(--lqip-cf) / 3 * 60% + 20%));
+
+  /* Oklab 基色 */
+  --lqip-base-clr: oklab(
+    calc(var(--lqip-ll) / 3 * 0.6 + 0.2)
+    calc(var(--lqip-aaa) / 8 * 0.7 - 0.35)
+    calc((var(--lqip-bbb) + 1) / 8 * 0.7 - 0.35)
+  );
+
+  /* 3×2 radial-gradient 渲染 + 基色底 */
+  background-image:
+    radial-gradient(50% 75% at 16.67% 25%, var(--lqip-ca-clr) 0%, var(--lqip-ca-clr) 70%, transparent 100%),
+    radial-gradient(50% 75% at 50% 25%, var(--lqip-cb-clr) 0%, var(--lqip-cb-clr) 70%, transparent 100%),
+    radial-gradient(50% 75% at 83.33% 25%, var(--lqip-cc-clr) 0%, var(--lqip-cc-clr) 70%, transparent 100%),
+    radial-gradient(50% 75% at 16.67% 75%, var(--lqip-cd-clr) 0%, var(--lqip-cd-clr) 70%, transparent 100%),
+    radial-gradient(50% 75% at 50% 75%, var(--lqip-ce-clr) 0%, var(--lqip-ce-clr) 70%, transparent 100%),
+    radial-gradient(50% 75% at 83.33% 75%, var(--lqip-cf-clr) 0%, var(--lqip-cf-clr) 70%, transparent 100%),
+    linear-gradient(var(--lqip-base-clr), var(--lqip-base-clr));
+  background-size: 100% 100%;
+}

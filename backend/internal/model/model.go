@@ -28,7 +28,7 @@ type RawGame struct {
 	Engine        string            `json:"engine,omitempty"` // ""(默认dosbox) | "playcanvas"
 	Types         []string          `json:"types,omitempty"`         // 游戏类型（多值，如 ["ACT","DOS"]）
 	CoverFilename string            `json:"coverFilename,omitempty"`
-	CoverBlurhash string            `json:"coverBlurhash,omitempty"` // 封面 blurhash 占位
+	Lqip int `json:"lqip,omitempty"` // CSS-only LQIP 整数
 	Keywords      []string          `json:"keywords,omitempty"`      // 搜索关键字（模糊搜索用，与类型不冲突）
 	Img           string            `json:"img,omitempty"`
 	Cdrom         string            `json:"cdrom,omitempty"`

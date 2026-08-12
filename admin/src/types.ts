@@ -14,7 +14,7 @@ export interface RawGame {
   engine?: 'dosbox' | 'playcanvas';
   types?: string[];
   coverFilename?: string;
-  coverBlurhash?: string;
+  lqip?: number;
   keywords?: string[];
   img?: string;
   cdrom?: string;

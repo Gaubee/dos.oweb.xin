@@ -36,7 +36,7 @@ export interface GameSummary {
   types?: string[];
   releaseYear?: number;
   coverUrl?: string;
-  coverBlurhash?: string;
+  lqip?: number;
   filesize: number;
   hasZip: boolean;
 }
@@ -50,8 +50,8 @@ export interface GameInfo {
   filesize: number;
   /** 游戏引擎：dosbox（默认）| playcanvas。决定 GamePlayer 用哪个运行时 */
   engine?: 'dosbox' | 'playcanvas';
-  /** 封面 blurhash（base83 字符串，加载前的模糊占位） */
-  coverBlurhash?: string;
+  /** CSS-only LQIP 整数（Go 预计算的 20bit 值） */
+  lqip?: number;
   types?: string[];
   keywords?: string[];
   coverFilename?: string;

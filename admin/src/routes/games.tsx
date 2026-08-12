@@ -336,7 +336,7 @@ function GamesTable({
                   {url ? (
                     <BlurhashImage
                       src={url}
-                      blurhash={g.coverBlurhash}
+                      lqip={g.lqip}
                       aspect="3/2"
                       alt={g.name['zh-Hans'] || g.identifier}
                       className="h-12 w-20 rounded"

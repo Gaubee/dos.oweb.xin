@@ -28,7 +28,7 @@ interface RawGame {
   sha256: string;
   filesize: number;
   engine?: 'dosbox' | 'playcanvas';
-  coverBlurhash?: string;
+  lqip?: number;
   types?: string[];
   keywords?: string[];
   coverFilename?: string;
@@ -164,7 +164,7 @@ function toSummary(g: GameInfo): GameSummary {
     types: g.types,
     releaseYear: g.releaseYear,
     coverUrl: g.coverUrl,
-    coverBlurhash: g.coverBlurhash,
+    lqip: g.lqip,
     filesize: g.filesize,
     hasZip: g.hasZip,
   };

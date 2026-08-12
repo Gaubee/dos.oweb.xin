@@ -27,7 +27,7 @@ export function GameCard({ game }: { game: GameSummary }) {
             {game.coverUrl ? (
               <BlurhashImage
                 src={game.coverUrl}
-                blurhash={game.coverBlurhash}
+                lqip={game.lqip}
                 aspect="3/2"
                 alt={displayName(game.name)}
               />

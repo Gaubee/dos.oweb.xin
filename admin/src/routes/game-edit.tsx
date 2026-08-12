@@ -107,7 +107,7 @@ function toGame(f: FormState, base?: RawGame): RawGame {
     ...(f.floppy.trim() ? { floppy: f.floppy.trim() } : {}),
     // 编辑模式保留后端已有字段（coverFilename / img / links / keymaps / cheats）
     ...(base?.coverFilename ? { coverFilename: base.coverFilename } : {}),
-    ...(base?.coverBlurhash ? { coverBlurhash: base.coverBlurhash } : {}),
+    ...(base?.lqip ? { lqip: base.lqip } : {}),
     ...(base?.types ? { types: base.types } : {}),
     ...(base?.keywords ? { keywords: base.keywords } : {}),
     ...(base?.img ? { img: base.img } : {}),
