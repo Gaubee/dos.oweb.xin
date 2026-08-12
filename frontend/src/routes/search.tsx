@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { useSearch } from '@/hooks/use-games';
 import { GameGrid } from '@/components/game-grid';
 import { Loading, ErrorState } from '@/components/state';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pagination } from '@/components/pagination';
 
 const PAGE_SIZE = 60;
 
@@ -30,17 +29,7 @@ export function SearchPage({ q }: { q: string }) {
       ) : (
         <>
           <GameGrid games={pageItems} />
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-4">
-              <Button size="icon" variant="outline" disabled={curPage <= 1} onClick={() => setPage(curPage - 1)}>
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <span className="text-sm tabular-nums">{curPage} / {totalPages}</span>
-              <Button size="icon" variant="outline" disabled={curPage >= totalPages} onClick={() => setPage(curPage + 1)}>
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          )}
+          <Pagination page={curPage} totalPages={totalPages} onPage={setPage} />
         </>
       )}
     </div>

@@ -6,7 +6,7 @@ import { Loading, ErrorState } from '@/components/state';
 import { TYPE_LABELS } from '@/types/game';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Pagination } from '@/components/pagination';
 
 const TYPES = Object.keys(TYPE_LABELS);
 const PAGE_SIZE = 60; // 固定每页 60 条（不允许自定义）
@@ -82,18 +82,7 @@ export function GamesPage() {
 
       <GameGrid games={pageItems} />
 
-      {/* 分页器 */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 pt-4">
-          <Button size="icon" variant="outline" disabled={curPage <= 1} onClick={() => setPage(curPage - 1)}>
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <span className="text-sm tabular-nums">{curPage} / {totalPages}</span>
-          <Button size="icon" variant="outline" disabled={curPage >= totalPages} onClick={() => setPage(curPage + 1)}>
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
+      <Pagination page={curPage} totalPages={totalPages} onPage={setPage} />
     </div>
   );
 }
