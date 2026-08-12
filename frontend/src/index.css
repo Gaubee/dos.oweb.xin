@@ -49,16 +49,26 @@
 
 /*
  * CSS-only LQIP（参考 leanrada.com/notes/css-only-lqip）
- * 零 JS、零 canvas——20bit 整数由 Go 预计算，CSS 用 mod()/pow()/round() 解码。
- * + pow(2,19) 偏移处理负数；radial-gradient 3×2 网格 + oklab 基色。
+ * 零 JS 解码——20bit 整数由 Go 预计算，CSS 用 mod()/pow()/round() 解码。
+ * @property 注册确保 CSS 数学函数类型推断正确。
  */
-.lqip-container {
-  background-color: hsl(var(--muted));
+@property --lqip { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-raw { syntax: '<number>'; inherits: false; initial-value: 524288; }
+@property --lqip-ca { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-cb { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-cc { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-cd { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-ce { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-cf { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-ll { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-aaa { syntax: '<integer>'; inherits: false; initial-value: 0; }
+@property --lqip-bbb { syntax: '<integer>'; inherits: false; initial-value: 0; }
 
+.lqip-container {
   /* 位解包：从 --lqip 整数提取各字段 */
   --lqip-raw: calc(var(--lqip) + pow(2, 19));
 
-  /* 6 个灰度值（2bit each）→ HSL 颜色 */
+  /* 6 个灰度值（2bit each） */
   --lqip-ca: mod(round(down, calc(var(--lqip-raw) / pow(2, 18))), 4);
   --lqip-cb: mod(round(down, calc(var(--lqip-raw) / pow(2, 16))), 4);
   --lqip-cc: mod(round(down, calc(var(--lqip-raw) / pow(2, 14))), 4);
