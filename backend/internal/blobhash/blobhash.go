@@ -45,23 +45,56 @@ func Encode(img image.Image) int {
 	w := bounds.Dx()
 	h := bounds.Dy()
 
-	// 1. 提取平均色 → Oklab → 8bit
-	var sumR, sumG, sumB float64
-	var pxCount int
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			r, g, b, _ := img.At(x, y).RGBA()
-			sumR += float64(r) / 65535.0
-			sumG += float64(g) / 65535.0
-			sumB += float64(b) / 65535.0
-			pxCount++
+	// 1. 提取主色 → Oklab → 8bit
+	// 用 6 格中色度（chroma = sqrt(a²+b²)）最大的格子的平均色作为主色，
+	// 而非全图平均色（平均色会偏中性，丢失色调）。
+	cellW := w / 3
+	if cellW < 1 { cellW = 1 }
+	cellH := h / 2
+	if cellH < 1 { cellH = 1 }
+
+	type cellAvg struct{ r, g, b, chroma float64 }
+	var cellColors [6]cellAvg
+
+	for cy := 0; cy < 2; cy++ {
+		for cx := 0; cx < 3; cx++ {
+			var sR, sG, sB float64
+			var cnt int
+			for y := bounds.Min.Y + cy*cellH; y < bounds.Min.Y+(cy+1)*cellH; y++ {
+				for x := bounds.Min.X + cx*cellW; x < bounds.Min.X+(cx+1)*cellW; x++ {
+					if x >= bounds.Max.X || y >= bounds.Max.Y { continue }
+					r, g, b, _ := img.At(x, y).RGBA()
+					sR += float64(r) / 65535.0
+					sG += float64(g) / 65535.0
+					sB += float64(b) / 65535.0
+					cnt++
+				}
+			}
+			if cnt == 0 { cnt = 1 }
+			avgR, avgG, avgB := sR/float64(cnt), sG/float64(cnt), sB/float64(cnt)
+			// 算 Oklab chroma
+			lR := srgbToLinear(avgR); lG := srgbToLinear(avgG); lB := srgbToLinear(avgB)
+			l := 0.4122214708*lR + 0.5363325363*lG + 0.0514459929*lB
+			m := 0.2119034982*lR + 0.6806995451*lG + 0.1073969566*lB
+			s := 0.0883024619*lR + 0.2817188376*lG + 0.6299787005*lB
+			l_ := math.Cbrt(l); m_ := math.Cbrt(m); s_ := math.Cbrt(s)
+			a := 1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_
+			bOk := 0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_
+			chroma := math.Sqrt(a*a + bOk*bOk)
+			idx := cy*3 + cx
+			cellColors[idx] = cellAvg{avgR, avgG, avgB, chroma}
 		}
 	}
-	if pxCount == 0 {
-		pxCount = 1
+
+	// 选色度最大的格子作为主色
+	bestIdx := 0
+	for i := 1; i < 6; i++ {
+		if cellColors[i].chroma > cellColors[bestIdx].chroma {
+			bestIdx = i
+		}
 	}
-	avgR, avgG, avgB := sumR/float64(pxCount), sumG/float64(pxCount), sumB/float64(pxCount)
-	ll, aaa, bbb := rgbToOklabBits(avgR, avgG, avgB)
+	domR, domG, domB := cellColors[bestIdx].r, cellColors[bestIdx].g, cellColors[bestIdx].b
+	ll, aaa, bbb := rgbToOklabBits(domR, domG, domB)
 
 	// 2. 3×2 灰度网格 → 12bit
 	ca, cb, cc, cd, ce, cf := grid3x2Greyscale(img, bounds, w, h)
