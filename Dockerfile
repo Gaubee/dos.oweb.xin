@@ -26,7 +26,7 @@ COPY admin/ ./
 RUN pnpm build
 
 # —— Stage 3: 构建 Go 二进制 ——
-FROM golang:1.26-slim AS go-builder
+FROM golang:1.26 AS go-builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
@@ -41,7 +41,7 @@ WORKDIR /app
 
 # 安装最小运行时依赖（bash for hooks，ca-certificates for HTTPS）
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash ca-certificates nodejs npm \
+    bash ca-certificates wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Go 二进制
@@ -58,16 +58,15 @@ COPY --from=admin-builder /app/admin/dist ./admin/dist
 
 # 迁移脚本（首次启动时执行）
 COPY backend/cmd/migrate-types ./backend/cmd/migrate-types
-COPY backend/cmd/gen-blurhash ./backend/cmd/gen-blurhash
+COPY backend/cmd/gen-lqip ./backend/cmd/gen-lqip
+COPY backend/cmd/hide-no-cover ./backend/cmd/hide-no-cover
 
 ENV ADMIN_ADDR=:7780
 ENV DATA_DIR=/app/frontend/public
 ENV ADMIN_DIST=/app/admin/dist
 EXPOSE 7780
 
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD curl -sf http://localhost:7780/api/games || exit 1
+# 无外部工具可用时不设 HEALTHCHECK（compose 用 service_started 依赖）
 
 ENTRYPOINT ["./dos-admin"]
 CMD ["--addr=:7780"]
