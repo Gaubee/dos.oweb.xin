@@ -20,6 +20,7 @@
       "executable": "runme.bat",
       "filesize": 1175212,
       "identifier": "1000公里",
+      "lqip": -521356,
       "name": {
         "zh-Hans": "1000公里"
       },
@@ -34,6 +35,7 @@
       "executable": "runme",
       "filesize": 1175212,
       "identifier": "1000米利亚",
+      "lqip": -521356,
       "name": {
         "zh-Hans": "1000米利亚"
       },
@@ -109,6 +111,7 @@
       "executable": "play.com",
       "filesize": 9356294,
       "identifier": "2601帝国联合舰队",
+      "lqip": 434804,
       "name": {
         "zh-Hans": "2601帝国联合舰队"
       },
@@ -198,6 +201,7 @@
       "executable": "3x3.bat",
       "filesize": 11469382,
       "identifier": "3x3只眼",
+      "lqip": 451747,
       "name": {
         "zh-Hans": "3x3只眼"
       },
@@ -240,6 +244,7 @@
       "executable": "688.bat",
       "filesize": 586310,
       "identifier": "688攻击潜艇",
+      "lqip": 170402,
       "name": {
         "zh-Hans": "688攻击潜艇"
       },
@@ -432,6 +437,7 @@
       "executable": "f15",
       "filesize": 6482925,
       "identifier": "F15战斗机",
+      "lqip": -176477,
       "name": {
         "zh-Hans": "F15战斗机"
       },
@@ -536,6 +542,7 @@
       "executable": "gp.bat",
       "filesize": 658282,
       "identifier": "GP500摩托赛",
+      "lqip": 169307,
       "name": {
         "zh-Hans": "GP500摩托赛"
       },
@@ -686,6 +693,7 @@
       "executable": "PLAY.BAT",
       "filesize": 12048493,
       "identifier": "PSY幽记",
+      "lqip": -173388,
       "name": {
         "zh-Hans": "PSY幽记"
       },
@@ -715,6 +723,7 @@
       "executable": "play.bat",
       "filesize": 601386,
       "identifier": "RS2",
+      "lqip": 85027,
       "name": {
         "zh-Hans": "RS2"
       },
@@ -759,6 +768,7 @@
       "executable": "xatax.exe",
       "filesize": 829773,
       "identifier": "XATAX战机",
+      "lqip": -108067,
       "name": {
         "zh-Hans": "XATAX战机"
       },
@@ -1009,6 +1019,7 @@
       "filesize": 86872813,
       "identifier": "七英雄物语",
       "img": "img/SEVEN.cue",
+      "lqip": -108253,
       "name": {
         "zh-Hans": "七英雄物语"
       },
@@ -1024,6 +1035,7 @@
       "filesize": 84523189,
       "identifier": "七英雄物语2",
       "img": "img/NANAEI2.cue",
+      "lqip": -109277,
       "name": {
         "zh-Hans": "七英雄物语2"
       },
@@ -1053,6 +1065,7 @@
       "executable": "sangoku",
       "filesize": 277247,
       "identifier": "三国志1",
+      "lqip": 170676,
       "name": {
         "zh-Hans": "三国志1"
       },
@@ -1202,6 +1215,7 @@
       "executable": "play",
       "filesize": 2868635,
       "identifier": "三国志雄霸天下",
+      "lqip": 108193,
       "name": {
         "zh-Hans": "三国志雄霸天下"
       },
@@ -1233,6 +1247,7 @@
       "executable": "ASV",
       "filesize": 1908080,
       "identifier": "三国演义1加强版",
+      "lqip": -108067,
       "name": {
         "zh-Hans": "三国演义1加强版"
       },
@@ -1248,6 +1263,7 @@
       "filesize": 132024328,
       "identifier": "三国演义2",
       "img": "CD/SANGO2.cue",
+      "lqip": -170380,
       "name": {
         "zh-Hans": "三国演义2"
       },
@@ -1262,6 +1278,7 @@
       "executable": "reko3",
       "filesize": 3461749,
       "identifier": "三国英杰传",
+      "lqip": 153004,
       "name": {
         "zh-Hans": "三国英杰传"
       },
@@ -1443,6 +1460,7 @@
       "executable": "play.bat",
       "filesize": 16256980,
       "identifier": "上古英雄传",
+      "lqip": -107859,
       "name": {
         "zh-Hans": "上古英雄传"
       },
@@ -1534,6 +1552,7 @@
       "executable": "play.bat",
       "filesize": 19526933,
       "identifier": "下级生(日)",
+      "lqip": -48085,
       "name": {
         "zh-Hans": "下级生(日)"
       },
@@ -1768,6 +1787,7 @@
       "executable": "jungle.exe",
       "filesize": 2946269,
       "identifier": "丛林大作战",
+      "lqip": 230748,
       "name": {
         "zh-Hans": "丛林大作战"
       },
@@ -1782,6 +1802,7 @@
       "executable": "play.bat",
       "filesize": 5089874,
       "identifier": "中关村启示录",
+      "lqip": -324710,
       "name": {
         "zh-Hans": "中关村启示录"
       },
@@ -1967,6 +1988,7 @@
       "executable": "play.bat",
       "filesize": 5119713,
       "identifier": "丽兽",
+      "lqip": -170597,
       "name": {
         "zh-Hans": "丽兽"
       },
@@ -2231,6 +2253,7 @@
       "executable": "mothcd",
       "filesize": 60262747,
       "identifier": "人面蛾",
+      "lqip": -169292,
       "name": {
         "zh-Hans": "人面蛾"
       },
@@ -2245,6 +2268,7 @@
       "executable": "trav",
       "filesize": 11209040,
       "identifier": "亿兆旅行者1",
+      "lqip": 436404,
       "name": {
         "zh-Hans": "亿兆旅行者1"
       },
@@ -2448,6 +2472,7 @@
       "executable": "koei.exe",
       "filesize": 1093614,
       "identifier": "伊忍道",
+      "lqip": 169251,
       "name": {
         "zh-Hans": "伊忍道"
       },
@@ -2477,6 +2502,7 @@
       "executable": "setup1.bat",
       "filesize": 22373504,
       "identifier": "伊甸风暴",
+      "lqip": -443357,
       "name": {
         "zh-Hans": "伊甸风暴"
       },
@@ -2579,6 +2605,7 @@
       "executable": "empire.bat",
       "filesize": 1952086,
       "identifier": "传说大陆帝王之子",
+      "lqip": -91548,
       "name": {
         "zh-Hans": "传说大陆帝王之子"
       },
@@ -2608,6 +2635,7 @@
       "executable": "lore.exe",
       "filesize": 272198,
       "identifier": "传说时代",
+      "lqip": -47907,
       "name": {
         "zh-Hans": "传说时代"
       },
@@ -2743,6 +2771,7 @@
       "executable": "game.exe",
       "filesize": 1306391,
       "identifier": "侠客英雄传",
+      "lqip": -46988,
       "name": {
         "zh-Hans": "侠客英雄传"
       },
@@ -2788,6 +2817,7 @@
       "filesize": 160658178,
       "identifier": "侠盗猎车手",
       "img": "CD/GTA.cue",
+      "lqip": -189149,
       "name": {
         "zh-Hans": "侠盗猎车手"
       },
@@ -2847,6 +2877,7 @@
       "executable": "ctetris",
       "filesize": 76694,
       "identifier": "俄罗斯方块",
+      "lqip": -104076,
       "name": {
         "zh-Hans": "俄罗斯方块"
       },
@@ -2861,6 +2892,7 @@
       "executable": "tetrisc",
       "filesize": 1311149,
       "identifier": "俄罗斯方块经典版",
+      "lqip": 152940,
       "name": {
         "zh-Hans": "俄罗斯方块经典版"
       },
@@ -2918,6 +2950,7 @@
       "executable": "koei.com",
       "filesize": 2605333,
       "identifier": "信长之野望5",
+      "lqip": 170420,
       "name": {
         "zh-Hans": "信长之野望5"
       },
@@ -3174,6 +3207,7 @@
       "executable": "play.bat",
       "filesize": 9597550,
       "identifier": "八女神物语2",
+      "lqip": -157004,
       "name": {
         "zh-Hans": "八女神物语2"
       },
@@ -3677,6 +3711,7 @@
       "filesize": 565491099,
       "identifier": "刘备传",
       "img": "liu2.cue",
+      "lqip": 103844,
       "name": {
         "zh-Hans": "刘备传"
       },
@@ -3691,6 +3726,7 @@
       "executable": "play.bat",
       "filesize": 14295313,
       "identifier": "创世封魔传",
+      "lqip": 492652,
       "name": {
         "zh-Hans": "创世封魔传"
       },
@@ -3751,6 +3787,7 @@
       "executable": "ultimaII",
       "filesize": 67994,
       "identifier": "创世纪2",
+      "lqip": -109021,
       "name": {
         "zh-Hans": "创世纪2"
       },
@@ -3910,6 +3947,7 @@
       "filesize": 78443429,
       "identifier": "剑侠情缘",
       "img": "CD/JXQY.cue",
+      "lqip": -373909,
       "name": {
         "zh-Hans": "剑侠情缘"
       },
@@ -4059,6 +4097,7 @@
       "executable": "play.bat",
       "filesize": 212110,
       "identifier": "勇者斗恶龙2",
+      "lqip": -108128,
       "name": {
         "zh-Hans": "勇者斗恶龙2"
       },
@@ -4308,6 +4347,7 @@
       "executable": "ice640",
       "filesize": 193812389,
       "identifier": "南极冰怪",
+      "lqip": -169260,
       "name": {
         "zh-Hans": "南极冰怪"
       },
@@ -4397,6 +4437,7 @@
       "executable": "kng.exe",
       "filesize": 2978926,
       "identifier": "卡耐鸡人生指南",
+      "lqip": -108123,
       "name": {
         "zh-Hans": "卡耐鸡人生指南"
       },
@@ -4624,6 +4665,7 @@
       "executable": "play.bat",
       "filesize": 5912860,
       "identifier": "危机特勤组",
+      "lqip": 213611,
       "name": {
         "zh-Hans": "危机特勤组"
       },
@@ -4813,6 +4855,7 @@
       "executable": "dragon.exe",
       "filesize": 867741,
       "identifier": "双截龙2",
+      "lqip": -309068,
       "name": {
         "zh-Hans": "双截龙2"
       },
@@ -4827,6 +4870,7 @@
       "executable": "dd3.exe",
       "filesize": 549567,
       "identifier": "双截龙3",
+      "lqip": 109220,
       "name": {
         "zh-Hans": "双截龙3"
       },
@@ -4928,6 +4972,7 @@
       "executable": "fs.bat",
       "filesize": 3574824,
       "identifier": "古大陆物语",
+      "lqip": -173725,
       "name": {
         "zh-Hans": "古大陆物语"
       },
@@ -5158,6 +5203,7 @@
       "executable": "PAC.EXE",
       "filesize": 1569723,
       "identifier": "吃豆人时空之旅",
+      "lqip": 154025,
       "name": {
         "zh-Hans": "吃豆人时空之旅"
       },
@@ -5172,6 +5218,7 @@
       "executable": "mspacem.bat",
       "filesize": 709483,
       "identifier": "吃豆夫人",
+      "lqip": -238115,
       "name": {
         "zh-Hans": "吃豆夫人"
       },
@@ -5381,6 +5428,7 @@
       "filesize": 296178498,
       "identifier": "吞食天地4",
       "img": "CD/SS4.cue",
+      "lqip": -63380,
       "name": {
         "zh-Hans": "吞食天地4"
       },
@@ -6102,6 +6150,7 @@
       "filesize": 155277566,
       "identifier": "圣光岛",
       "img": "cd/cd.cue",
+      "lqip": 30314,
       "name": {
         "zh-Hans": "圣光岛"
       },
@@ -6222,6 +6271,7 @@
       "filesize": 169967185,
       "identifier": "圣战风云录",
       "img": "szfyl.iso",
+      "lqip": -109140,
       "name": {
         "zh-Hans": "圣战风云录"
       },
@@ -6562,6 +6612,7 @@
       "executable": "summer.bat",
       "filesize": 1837048,
       "identifier": "夏日物语",
+      "lqip": -92766,
       "name": {
         "zh-Hans": "夏日物语"
       },
@@ -6753,6 +6804,7 @@
       "filesize": 7297587,
       "floppy": "a",
       "identifier": "大富翁1",
+      "lqip": -373213,
       "name": {
         "zh-Hans": "大富翁1"
       },
@@ -6818,6 +6870,7 @@
       "filesize": 167605949,
       "identifier": "大富翁总动员",
       "img": "CrazyWar_v1.02.cue",
+      "lqip": -182878,
       "name": {
         "zh-Hans": "大富翁总动员"
       },
@@ -6875,6 +6928,7 @@
       "executable": "war.bat",
       "filesize": 5335426,
       "identifier": "大战略",
+      "lqip": 464099,
       "name": {
         "zh-Hans": "大战略"
       },
@@ -7101,6 +7155,7 @@
       "executable": "play.bat",
       "filesize": 88508130,
       "identifier": "大魔王物语",
+      "lqip": -169308,
       "name": {
         "zh-Hans": "大魔王物语"
       },
@@ -7265,6 +7320,7 @@
       "filesize": 73905793,
       "identifier": "天师钟馗",
       "img": "cd/TTN_GHOST.cue",
+      "lqip": 385508,
       "name": {
         "zh-Hans": "天师钟馗"
       },
@@ -7340,6 +7396,7 @@
       "filesize": 586112257,
       "identifier": "天晴传",
       "img": "ORFD.cue",
+      "lqip": 108260,
       "name": {
         "zh-Hans": "天晴传"
       },
@@ -7399,6 +7456,7 @@
       "executable": "play.bat",
       "filesize": 125191405,
       "identifier": "天龙八部",
+      "lqip": 108005,
       "name": {
         "zh-Hans": "天龙八部"
       },
@@ -7637,6 +7695,7 @@
       "executable": "play.bat",
       "filesize": 5892789,
       "identifier": "失落的封印",
+      "lqip": -111180,
       "name": {
         "zh-Hans": "失落的封印"
       },
@@ -7708,6 +7767,7 @@
       "filesize": 82107208,
       "identifier": "头号通缉犯",
       "img": "IMG/TTN_NO1.cue",
+      "lqip": -152990,
       "name": {
         "zh-Hans": "头号通缉犯"
       },
@@ -7808,6 +7868,7 @@
       "executable": "arnie2",
       "filesize": 367627,
       "identifier": "奥尼大作战2",
+      "lqip": -108125,
       "name": {
         "zh-Hans": "奥尼大作战2"
       },
@@ -7922,6 +7983,7 @@
       "executable": "play.bat",
       "filesize": 4622107,
       "identifier": "妖击队",
+      "lqip": 169386,
       "name": {
         "zh-Hans": "妖击队"
       },
@@ -8039,6 +8101,7 @@
       "executable": "zzt",
       "filesize": 377378,
       "identifier": "字符世界历险记",
+      "lqip": 158048,
       "name": {
         "zh-Hans": "字符世界历险记"
       },
@@ -8067,6 +8130,7 @@
       "executable": "rk.exe",
       "filesize": 5677677,
       "identifier": "学园退魔传",
+      "lqip": -108246,
       "name": {
         "zh-Hans": "学园退魔传"
       },
@@ -8484,6 +8548,7 @@
       "executable": "play.bat",
       "filesize": 8514061,
       "identifier": "射雕英雄传",
+      "lqip": -103900,
       "name": {
         "zh-Hans": "射雕英雄传"
       },
@@ -9111,6 +9176,7 @@
       "links": {
         "巴士帝国密码": "https://github.com/Xunius/bus_empire_passwords"
       },
+      "lqip": -169375,
       "name": {
         "zh-Hans": "巴士帝国"
       },
@@ -9140,6 +9206,7 @@
       "executable": "bstone.bat",
       "filesize": 5580473,
       "identifier": "布莱克之石异星黄金",
+      "lqip": -169438,
       "name": {
         "zh-Hans": "布莱克之石异星黄金"
       },
@@ -9258,6 +9325,7 @@
       "filesize": 51698207,
       "identifier": "幻想奇侠传",
       "img": "CD/JHL.cue",
+      "lqip": 491700,
       "name": {
         "zh-Hans": "幻想奇侠传"
       },
@@ -9362,6 +9430,7 @@
       "executable": "play.com",
       "filesize": 22228078,
       "identifier": "幻界霸者",
+      "lqip": -108253,
       "name": {
         "zh-Hans": "幻界霸者"
       },
@@ -9389,6 +9458,7 @@
       "executable": "DIF2.BAT",
       "filesize": 5546312,
       "identifier": "幻象雷电",
+      "lqip": -91861,
       "name": {
         "zh-Hans": "幻象雷电"
       },
@@ -9825,6 +9895,7 @@
       "executable": "gc",
       "filesize": 14004874,
       "identifier": "异星突击",
+      "lqip": -109213,
       "name": {
         "zh-Hans": "异星突击"
       },
@@ -9871,6 +9942,7 @@
       "executable": "play.bat",
       "filesize": 5639488,
       "identifier": "异次元之旅",
+      "lqip": -442725,
       "name": {
         "zh-Hans": "异次元之旅"
       },
@@ -10102,6 +10174,7 @@
       "executable": "play.bat",
       "filesize": 5126371,
       "identifier": "德军总部MOD-DOOM版",
+      "lqip": 169312,
       "name": {
         "zh-Hans": "德军总部MOD-DOOM版"
       },
@@ -10144,6 +10217,7 @@
       "executable": "play.bat",
       "filesize": 9096220,
       "identifier": "德军总部命运之矛",
+      "lqip": 348523,
       "name": {
         "zh-Hans": "德军总部命运之矛"
       },
@@ -10609,6 +10683,7 @@
       "executable": "sadlake.exe",
       "filesize": 2224593,
       "identifier": "悲恋湖杀人事件",
+      "lqip": -103763,
       "name": {
         "zh-Hans": "悲恋湖杀人事件"
       },
@@ -10696,6 +10771,7 @@
       "executable": "play.bat",
       "filesize": 429336,
       "identifier": "成吉思汗",
+      "lqip": -230988,
       "name": {
         "zh-Hans": "成吉思汗"
       },
@@ -10885,6 +10961,7 @@
       "executable": "play.bat",
       "filesize": 2778114,
       "identifier": "战国时代",
+      "lqip": -169507,
       "name": {
         "zh-Hans": "战国时代"
       },
@@ -11013,6 +11090,7 @@
       "executable": "goldaxe.exe",
       "filesize": 591918,
       "identifier": "战斧",
+      "lqip": 169435,
       "name": {
         "zh-Hans": "战斧"
       },
@@ -12004,6 +12082,7 @@
       "executable": "CIV.BAT",
       "filesize": 1840030,
       "identifier": "文明",
+      "lqip": -521052,
       "name": {
         "zh-Hans": "文明"
       },
@@ -12121,6 +12200,7 @@
       "executable": "play.bat",
       "filesize": 3375284,
       "identifier": "新世纪兴亡史",
+      "lqip": -63197,
       "name": {
         "zh-Hans": "新世纪兴亡史"
       },
@@ -12151,6 +12231,7 @@
       "executable": "play",
       "filesize": 4210020,
       "identifier": "新狼人摩天楼",
+      "lqip": 87460,
       "name": {
         "zh-Hans": "新狼人摩天楼"
       },
@@ -12210,6 +12291,7 @@
       "executable": "scream.bat",
       "filesize": 63576979,
       "identifier": "无声狂啸",
+      "lqip": -92637,
       "name": {
         "zh-Hans": "无声狂啸"
       },
@@ -12397,6 +12479,7 @@
       "executable": "ECP",
       "filesize": 107730281,
       "identifier": "日蚀",
+      "lqip": -103773,
       "name": {
         "zh-Hans": "日蚀"
       },
@@ -12497,6 +12580,7 @@
       "executable": "play.bat",
       "filesize": 8486855,
       "identifier": "时空特勤组",
+      "lqip": -446941,
       "name": {
         "zh-Hans": "时空特勤组"
       },
@@ -12542,6 +12626,7 @@
       "filesize": 553289881,
       "identifier": "明日之星2",
       "img": "STAR2.mdf",
+      "lqip": 91869,
       "name": {
         "zh-Hans": "明日之星2"
       },
@@ -12637,6 +12722,7 @@
       "filesize": 175648729,
       "identifier": "星月奇缘",
       "img": "IMG/TTN_MOON.cue",
+      "lqip": 208868,
       "name": {
         "zh-Hans": "星月奇缘"
       },
@@ -12680,6 +12766,7 @@
       "filesize": 55357459,
       "identifier": "星球大战X战机",
       "img": "SWXWCD.CUE",
+      "lqip": 173667,
       "name": {
         "zh-Hans": "星球大战X战机"
       },
@@ -12961,6 +13048,7 @@
       "executable": "play.bat",
       "filesize": 7252180,
       "identifier": "春秋争霸传2",
+      "lqip": 153891,
       "name": {
         "zh-Hans": "春秋争霸传2"
       },
@@ -13033,6 +13121,7 @@
       "executable": "sforce.bat",
       "filesize": 2177715,
       "identifier": "暗影之力",
+      "lqip": 169249,
       "name": {
         "zh-Hans": "暗影之力"
       },
@@ -13047,6 +13136,7 @@
       "executable": "shadow",
       "filesize": 321365,
       "identifier": "暗影之地",
+      "lqip": -103772,
       "name": {
         "zh-Hans": "暗影之地"
       },
@@ -13211,6 +13301,7 @@
       "executable": "game.bat",
       "filesize": 494802,
       "identifier": "最后武力",
+      "lqip": -157405,
       "name": {
         "zh-Hans": "最后武力"
       },
@@ -13769,6 +13860,7 @@
       "executable": "act.com",
       "filesize": 1814084,
       "identifier": "格斗拳王",
+      "lqip": 230565,
       "name": {
         "zh-Hans": "格斗拳王"
       },
@@ -13813,6 +13905,7 @@
       "executable": "db.exe",
       "filesize": 228578,
       "identifier": "桥牌",
+      "lqip": -173676,
       "name": {
         "zh-Hans": "桥牌"
       },
@@ -13857,6 +13950,7 @@
       "executable": "pro2.exe",
       "filesize": 9451000,
       "identifier": "梦幻天使",
+      "lqip": -111253,
       "name": {
         "zh-Hans": "梦幻天使"
       },
@@ -14336,6 +14430,7 @@
       "executable": "play.bat",
       "filesize": 3289841,
       "identifier": "欢乐城市",
+      "lqip": 152938,
       "name": {
         "zh-Hans": "欢乐城市"
       },
@@ -14350,6 +14445,7 @@
       "executable": "play.bat",
       "filesize": 5309396,
       "identifier": "欢乐天使",
+      "lqip": -152867,
       "name": {
         "zh-Hans": "欢乐天使"
       },
@@ -14364,6 +14460,7 @@
       "executable": "happy.bat",
       "filesize": 3456505,
       "identifier": "欢乐幸福人",
+      "lqip": -169308,
       "name": {
         "zh-Hans": "欢乐幸福人"
       },
@@ -14551,6 +14648,7 @@
       "executable": "play.bat",
       "filesize": 5590313,
       "identifier": "武状元黄飞鸿",
+      "lqip": -372884,
       "name": {
         "zh-Hans": "武状元黄飞鸿"
       },
@@ -15078,6 +15176,7 @@
       "executable": "water.exe",
       "filesize": 14364670,
       "identifier": "水浒传之梁山英雄",
+      "lqip": -231781,
       "name": {
         "zh-Hans": "水浒传之梁山英雄"
       },
@@ -15256,6 +15355,7 @@
       "executable": "play.bat",
       "filesize": 10712292,
       "identifier": "汉堡战争",
+      "lqip": -92748,
       "name": {
         "zh-Hans": "汉堡战争"
       },
@@ -15345,6 +15445,7 @@
       "executable": "SILENT",
       "filesize": 768919,
       "identifier": "沉默潜航2",
+      "lqip": 169250,
       "name": {
         "zh-Hans": "沉默潜航2"
       },
@@ -15476,6 +15577,7 @@
       "executable": "shannara.exe",
       "filesize": 38153881,
       "identifier": "沙拉那之剑",
+      "lqip": 169444,
       "name": {
         "zh-Hans": "沙拉那之剑"
       },
@@ -15548,6 +15650,7 @@
       "executable": "dob",
       "filesize": 714963,
       "identifier": "波士顿守卫者",
+      "lqip": 442721,
       "name": {
         "zh-Hans": "波士顿守卫者"
       },
@@ -16692,6 +16795,7 @@
       "filesize": 95541626,
       "identifier": "爆笑水浒传",
       "img": "CD/BXSHZ.cue",
+      "lqip": 153012,
       "name": {
         "zh-Hans": "爆笑水浒传"
       },
@@ -16736,6 +16840,7 @@
       "executable": "play.bat",
       "filesize": 4419525,
       "identifier": "爱之物语2",
+      "lqip": -332428,
       "name": {
         "zh-Hans": "爱之物语2"
       },
@@ -16845,6 +16950,7 @@
       "executable": "pds",
       "filesize": 3141661,
       "identifier": "特勤机甲队",
+      "lqip": -91806,
       "name": {
         "zh-Hans": "特勤机甲队"
       },
@@ -16859,6 +16965,7 @@
       "executable": "pds2",
       "filesize": 4371730,
       "identifier": "特勤机甲队2",
+      "lqip": -169630,
       "name": {
         "zh-Hans": "特勤机甲队2"
       },
@@ -17073,6 +17180,7 @@
       "executable": "play.bat",
       "filesize": 2436697,
       "identifier": "狂龙传",
+      "lqip": 108212,
       "name": {
         "zh-Hans": "狂龙传"
       },
@@ -17117,6 +17225,7 @@
       "executable": "liberty",
       "filesize": 1694943,
       "identifier": "独立战争",
+      "lqip": -109279,
       "name": {
         "zh-Hans": "独立战争"
       },
@@ -17217,6 +17326,7 @@
       "executable": "sh",
       "filesize": 68579942,
       "identifier": "猎杀潜航",
+      "lqip": -108253,
       "name": {
         "zh-Hans": "猎杀潜航"
       },
@@ -17571,6 +17681,7 @@
       "executable": "play.bat",
       "filesize": 4039701,
       "identifier": "生化情人",
+      "lqip": -107796,
       "name": {
         "zh-Hans": "生化情人"
       },
@@ -17736,6 +17847,7 @@
       "executable": "crazy.exe",
       "filesize": 3230821,
       "identifier": "疯狂双响炮",
+      "lqip": -108255,
       "name": {
         "zh-Hans": "疯狂双响炮"
       },
@@ -17750,6 +17862,7 @@
       "executable": "rampage",
       "filesize": 126939,
       "identifier": "疯狂大毁灭",
+      "lqip": 77664,
       "name": {
         "zh-Hans": "疯狂大毁灭"
       },
@@ -17764,6 +17877,7 @@
       "executable": "mega.exe",
       "filesize": 1112459,
       "identifier": "疯狂大陆",
+      "lqip": 154028,
       "name": {
         "zh-Hans": "疯狂大陆"
       },
@@ -17823,6 +17937,7 @@
       "executable": "ducks",
       "filesize": 1398597,
       "identifier": "疯狂小鸭",
+      "lqip": -108253,
       "name": {
         "zh-Hans": "疯狂小鸭"
       },
@@ -17837,6 +17952,7 @@
       "executable": "dott.exe",
       "filesize": 8207725,
       "identifier": "疯狂时代",
+      "lqip": 169313,
       "name": {
         "zh-Hans": "疯狂时代"
       },
@@ -17851,6 +17967,7 @@
       "executable": "crazy.bat",
       "filesize": 439012,
       "identifier": "疯狂橄榄球",
+      "lqip": 377314,
       "name": {
         "zh-Hans": "疯狂橄榄球"
       },
@@ -17865,6 +17982,7 @@
       "executable": "mtv.exe",
       "filesize": 813629,
       "identifier": "疯狂电视台",
+      "lqip": 170284,
       "name": {
         "zh-Hans": "疯狂电视台"
       },
@@ -17909,6 +18027,7 @@
       "executable": "cc3.com",
       "filesize": 753355,
       "identifier": "疯狂赛车3",
+      "lqip": 231604,
       "name": {
         "zh-Hans": "疯狂赛车3"
       },
@@ -17923,6 +18042,7 @@
       "executable": "MADDOG.bat",
       "filesize": 80638779,
       "identifier": "疯狗",
+      "lqip": 398755,
       "name": {
         "zh-Hans": "疯狗"
       },
@@ -17937,6 +18057,7 @@
       "executable": "MDWVGA.EXE",
       "filesize": 2363163,
       "identifier": "疯狗威廉的地下城之旅",
+      "lqip": 123555,
       "name": {
         "zh-Hans": "疯狗威廉的地下城之旅"
       },
@@ -17981,6 +18102,7 @@
       "executable": "liero",
       "filesize": 443821,
       "identifier": "百战地虫",
+      "lqip": 169388,
       "name": {
         "zh-Hans": "百战地虫"
       },
@@ -18504,6 +18626,7 @@
       "executable": "play.bat",
       "filesize": 1509690,
       "identifier": "神州八剑",
+      "lqip": 169652,
       "name": {
         "zh-Hans": "神州八剑"
       },
@@ -18590,6 +18713,7 @@
       "filesize": 161329850,
       "identifier": "神谕",
       "img": "IMG/ORACLE.cue",
+      "lqip": -54749,
       "name": {
         "zh-Hans": "神谕"
       },
@@ -18620,6 +18744,7 @@
       "executable": "play.com",
       "filesize": 6846711,
       "identifier": "禁忌",
+      "lqip": -104864,
       "name": {
         "zh-Hans": "禁忌"
       },
@@ -19749,6 +19874,7 @@
       "executable": "playx.bat",
       "filesize": 12792748,
       "identifier": "绝代双骄",
+      "lqip": -171101,
       "name": {
         "zh-Hans": "绝代双骄"
       },
@@ -19764,6 +19890,7 @@
       "executable": "avg.exe",
       "filesize": 60109020,
       "identifier": "绝地-众神的诅咒",
+      "lqip": -104797,
       "name": {
         "zh-Hans": "绝地-众神的诅咒"
       },
@@ -20023,6 +20150,7 @@
       "executable": "city.bat",
       "filesize": 3851960,
       "identifier": "罪恶都市",
+      "lqip": 158300,
       "name": {
         "zh-Hans": "罪恶都市"
       },
@@ -20121,6 +20249,7 @@
       "executable": "pk1.exe",
       "filesize": 607661,
       "identifier": "美少女扑克",
+      "lqip": -78893,
       "name": {
         "zh-Hans": "美少女扑克"
       },
@@ -20136,6 +20265,7 @@
       "filesize": 5855184,
       "floppy": "no",
       "identifier": "美少女梦工厂",
+      "lqip": -108126,
       "name": {
         "zh-Hans": "美少女梦工厂"
       },
@@ -20170,6 +20300,7 @@
       "executable": "play.bat",
       "filesize": 3702420,
       "identifier": "美少女特勤组",
+      "lqip": 169396,
       "name": {
         "zh-Hans": "美少女特勤组"
       },
@@ -20315,6 +20446,7 @@
       "executable": "skunnyk",
       "filesize": 1432647,
       "identifier": "臭鼬赛车",
+      "lqip": -87372,
       "name": {
         "zh-Hans": "臭鼬赛车"
       },
@@ -20513,6 +20645,7 @@
       "executable": "elvira.bat",
       "filesize": 2379653,
       "identifier": "艾薇拉动作版",
+      "lqip": -123614,
       "name": {
         "zh-Hans": "艾薇拉动作版"
       },
@@ -20527,6 +20660,7 @@
       "executable": "barbie.exe",
       "filesize": 1711440,
       "identifier": "芭比超级模特",
+      "lqip": -152845,
       "name": {
         "zh-Hans": "芭比超级模特"
       },
@@ -20689,6 +20823,7 @@
       "executable": "play.bat",
       "filesize": 11885598,
       "identifier": "英雄圣战",
+      "lqip": 169445,
       "name": {
         "zh-Hans": "英雄圣战"
       },
@@ -20704,6 +20839,7 @@
       "executable": "play.bat",
       "filesize": 53437740,
       "identifier": "英雄战记",
+      "lqip": -109212,
       "name": {
         "zh-Hans": "英雄战记"
       },
@@ -20903,6 +21039,7 @@
       "executable": "fastfood",
       "filesize": 178579,
       "identifier": "蒂斯蛋快餐世界",
+      "lqip": -109164,
       "name": {
         "zh-Hans": "蒂斯蛋快餐世界"
       },
@@ -20917,6 +21054,7 @@
       "executable": "dizzy",
       "filesize": 186524,
       "identifier": "蒂斯蛋梦幻世界",
+      "lqip": 173474,
       "name": {
         "zh-Hans": "蒂斯蛋梦幻世界"
       },
@@ -20959,6 +21097,7 @@
       "executable": "yolk.exe",
       "filesize": 164111,
       "identifier": "蒂斯蛋蛋黄王子",
+      "lqip": 446938,
       "name": {
         "zh-Hans": "蒂斯蛋蛋黄王子"
       },
@@ -21030,6 +21169,7 @@
       "executable": "play.bat",
       "filesize": 4472268,
       "identifier": "蓝色石榴石",
+      "lqip": 215394,
       "name": {
         "zh-Hans": "蓝色石榴石"
       },
@@ -21214,6 +21354,7 @@
       "executable": "runme.bat",
       "filesize": 1979580,
       "identifier": "蜂箱赌坊",
+      "lqip": 108269,
       "name": {
         "zh-Hans": "蜂箱赌坊"
       },
@@ -21271,6 +21412,7 @@
       "executable": "batman",
       "filesize": 389979,
       "identifier": "蝙蝠侠电影版",
+      "lqip": -87390,
       "name": {
         "zh-Hans": "蝙蝠侠电影版"
       },
@@ -21475,6 +21617,7 @@
       "executable": "runme.bat",
       "filesize": 412742,
       "identifier": "被遗忘的世界",
+      "lqip": -451107,
       "name": {
         "zh-Hans": "被遗忘的世界"
       },
@@ -21517,6 +21660,7 @@
       "executable": "tank",
       "filesize": 819673,
       "identifier": "装甲雄狮",
+      "lqip": 442716,
       "name": {
         "zh-Hans": "装甲雄狮"
       },
@@ -21531,6 +21675,7 @@
       "executable": "wking.exe",
       "filesize": 385934613,
       "identifier": "西楚霸王",
+      "lqip": -104030,
       "name": {
         "zh-Hans": "西楚霸王"
       },
@@ -21590,6 +21735,7 @@
       "executable": "play.bat",
       "filesize": 2764726,
       "identifier": "西游记",
+      "lqip": 108004,
       "name": {
         "zh-Hans": "西游记"
       },
@@ -21878,6 +22024,7 @@
       "executable": "play.bat",
       "filesize": 1123528,
       "identifier": "象棋俄罗斯",
+      "lqip": -109212,
       "name": {
         "zh-Hans": "象棋俄罗斯"
       },
@@ -22145,6 +22292,7 @@
       "executable": "spidey",
       "filesize": 186929,
       "identifier": "超凡蜘蛛侠",
+      "lqip": -108172,
       "name": {
         "zh-Hans": "超凡蜘蛛侠"
       },
@@ -22175,6 +22323,7 @@
       "filesize": 208736280,
       "identifier": "超时空英雄传说",
       "img": "CD/SUPER.cue",
+      "lqip": -92700,
       "name": {
         "zh-Hans": "超时空英雄传说"
       },
@@ -22190,6 +22339,7 @@
       "filesize": 182593186,
       "identifier": "超时空英雄传说2",
       "img": "CD/SUPER2.cue",
+      "lqip": 230435,
       "name": {
         "zh-Hans": "超时空英雄传说2"
       },
@@ -22217,6 +22367,7 @@
       "executable": "mac.com",
       "filesize": 2472255,
       "identifier": "超时空要塞",
+      "lqip": 247331,
       "name": {
         "zh-Hans": "超时空要塞"
       },
@@ -22516,6 +22667,7 @@
       "executable": "sf.exe",
       "filesize": 2580131,
       "identifier": "超级蛙",
+      "lqip": 173748,
       "name": {
         "zh-Hans": "超级蛙"
       },
@@ -22530,6 +22682,7 @@
       "executable": "ssf2t.bat",
       "filesize": 9864724,
       "identifier": "超级街霸2",
+      "lqip": -49055,
       "name": {
         "zh-Hans": "超级街霸2"
       },
@@ -22544,6 +22697,7 @@
       "executable": "SF2.COM",
       "filesize": 3808621,
       "identifier": "超级街霸新挑战者",
+      "lqip": -169632,
       "name": {
         "zh-Hans": "超级街霸新挑战者"
       },
@@ -22588,6 +22742,7 @@
       "executable": "abyss",
       "filesize": 296817,
       "identifier": "超越深渊",
+      "lqip": -108180,
       "name": {
         "zh-Hans": "超越深渊"
       },
@@ -22602,6 +22757,7 @@
       "executable": "outrun",
       "filesize": 488369,
       "identifier": "超越竞速",
+      "lqip": -174432,
       "name": {
         "zh-Hans": "超越竞速"
       },
@@ -22766,6 +22922,7 @@
       "executable": "swda",
       "filesize": 17552166,
       "identifier": "轩辕剑外传枫之舞",
+      "lqip": 153196,
       "name": {
         "zh-Hans": "轩辕剑外传枫之舞"
       },
@@ -22798,6 +22955,7 @@
       "filesize": 135537230,
       "identifier": "轩辕圣战录",
       "img": "cd/SHENWEN.CUE",
+      "lqip": 170348,
       "name": {
         "zh-Hans": "轩辕圣战录"
       },
@@ -23087,6 +23245,7 @@
       "executable": "play.bat",
       "filesize": 3894097,
       "identifier": "迷走都市",
+      "lqip": 169315,
       "name": {
         "zh-Hans": "迷走都市"
       },
@@ -23332,6 +23491,7 @@
       "filesize": 197559358,
       "identifier": "邪灵世纪",
       "img": "TTN_VAMPIRE.CUE",
+      "lqip": -169308,
       "name": {
         "zh-Hans": "邪灵世纪"
       },
@@ -23359,6 +23519,7 @@
       "executable": "play.bat",
       "filesize": 1935261,
       "identifier": "邪神传说",
+      "lqip": -63453,
       "name": {
         "zh-Hans": "邪神传说"
       },
@@ -23461,6 +23622,7 @@
       "executable": "WOLF3D.EXE",
       "filesize": 1130009,
       "identifier": "重返德军总部3D",
+      "lqip": -91551,
       "name": {
         "zh-Hans": "重返德军总部3D"
       },
@@ -23561,6 +23723,7 @@
       "executable": "fighter",
       "filesize": 11529337,
       "identifier": "金庸快打",
+      "lqip": -152861,
       "name": {
         "zh-Hans": "金庸快打"
       },
@@ -23835,6 +23998,7 @@
       "executable": "play",
       "filesize": 8658786,
       "identifier": "钢铁骑士团",
+      "lqip": 169396,
       "name": {
         "zh-Hans": "钢铁骑士团"
       },
@@ -24160,6 +24324,7 @@
       "filesize": 113096080,
       "identifier": "银河英雄",
       "img": "img/BOUNTY.cue",
+      "lqip": 239713,
       "name": {
         "zh-Hans": "银河英雄"
       },
@@ -24369,6 +24534,7 @@
       "filesize": 316525402,
       "identifier": "镇暴特遣队",
       "img": "cd2.cue",
+      "lqip": -188492,
       "name": {
         "zh-Hans": "镇暴特遣队"
       },
@@ -24542,6 +24708,7 @@
       "executable": "albilow.bat",
       "filesize": 64730914,
       "identifier": "阿尔比恩",
+      "lqip": -369380,
       "name": {
         "zh-Hans": "阿尔比恩"
       },
@@ -24571,6 +24738,7 @@
       "executable": "aladdin.exe",
       "filesize": 1799770,
       "identifier": "阿拉丁传奇",
+      "lqip": -108184,
       "name": {
         "zh-Hans": "阿拉丁传奇"
       },
@@ -24661,6 +24829,7 @@
       "executable": "aleshar",
       "filesize": 2662805,
       "identifier": "阿蕾莎冰封世界",
+      "lqip": -169246,
       "name": {
         "zh-Hans": "阿蕾莎冰封世界"
       },
@@ -24956,6 +25125,7 @@
       "executable": "raiden",
       "filesize": 1489799,
       "identifier": "雷电",
+      "lqip": -169372,
       "name": {
         "zh-Hans": "雷电"
       },
@@ -25078,6 +25248,7 @@
       "filesize": 166065356,
       "identifier": "霹雳幽灵剑",
       "img": "CD/PILI.cue",
+      "lqip": -272542,
       "name": {
         "zh-Hans": "霹雳幽灵剑"
       },
@@ -25108,6 +25279,7 @@
       "executable": "marry",
       "filesize": 12815343,
       "identifier": "青涩的果实",
+      "lqip": 170732,
       "name": {
         "zh-Hans": "青涩的果实"
       },
@@ -25186,6 +25358,7 @@
       "executable": "play.bat",
       "filesize": 2289742,
       "identifier": "项刘记",
+      "lqip": 169316,
       "name": {
         "zh-Hans": "项刘记"
       },
@@ -25213,6 +25386,7 @@
       "executable": "go.bat",
       "filesize": 4938676,
       "identifier": "顽皮小精灵",
+      "lqip": 152922,
       "name": {
         "zh-Hans": "顽皮小精灵"
       },
@@ -25298,6 +25472,7 @@
       "executable": "game",
       "filesize": 3356938,
       "identifier": "风云天下三国篇",
+      "lqip": 169252,
       "name": {
         "zh-Hans": "风云天下三国篇"
       },
@@ -25613,6 +25788,7 @@
       "executable": "dstrike.exe",
       "filesize": 1010188,
       "identifier": "飞龙骑士",
+      "lqip": -108183,
       "name": {
         "zh-Hans": "飞龙骑士"
       },
@@ -25919,6 +26095,7 @@
       "filesize": 66628445,
       "identifier": "鬼屋魔影3",
       "img": "CD/AITD3.cue",
+      "lqip": 169251,
       "name": {
         "zh-Hans": "鬼屋魔影3"
       },
@@ -25991,6 +26168,7 @@
       "executable": "war2",
       "filesize": 14319841,
       "identifier": "魔兽争霸2",
+      "lqip": -105182,
       "name": {
         "zh-Hans": "魔兽争霸2"
       },
@@ -26211,6 +26389,7 @@
       "executable": "play.bat",
       "filesize": 4748483,
       "identifier": "魔异入侵",
+      "lqip": 154036,
       "name": {
         "zh-Hans": "魔异入侵"
       },
@@ -26270,6 +26449,7 @@
       "executable": "start",
       "filesize": 11064531,
       "identifier": "魔栈",
+      "lqip": -451293,
       "name": {
         "zh-Hans": "魔栈"
       },
@@ -26391,6 +26571,7 @@
       "executable": "warlockd",
       "filesize": 218809110,
       "identifier": "魔法军团",
+      "lqip": -91806,
       "name": {
         "zh-Hans": "魔法军团"
       },
@@ -26729,6 +26910,7 @@
       "executable": "play.bat",
       "filesize": 7332916,
       "identifier": "魔界之泉动乱魔都",
+      "lqip": 169250,
       "name": {
         "zh-Hans": "魔界之泉动乱魔都"
       },
@@ -26743,6 +26925,7 @@
       "executable": "bgs",
       "filesize": 3558202,
       "identifier": "魔界之泉灰石传奇",
+      "lqip": -521182,
       "name": {
         "zh-Hans": "魔界之泉灰石传奇"
       },
@@ -26802,6 +26985,7 @@
       "executable": "start.exe",
       "filesize": 1833190,
       "identifier": "魔眼杀机",
+      "lqip": -108190,
       "name": {
         "zh-Hans": "魔眼杀机"
       },
@@ -26919,6 +27103,7 @@
       "executable": "mg2",
       "filesize": 6245766,
       "identifier": "魔神战记2",
+      "lqip": -157279,
       "name": {
         "zh-Hans": "魔神战记2"
       },
@@ -27111,6 +27296,7 @@
       "filesize": 52723415,
       "identifier": "麻将争霸",
       "img": "MAJAN.cue",
+      "lqip": 169372,
       "name": {
         "zh-Hans": "麻将争霸"
       },
@@ -27213,6 +27399,7 @@
       "executable": "lasthero.exe",
       "filesize": 3690769,
       "identifier": "黄飞鸿铁公鸡斗蜈蚣",
+      "lqip": -73244,
       "name": {
         "zh-Hans": "黄飞鸿铁公鸡斗蜈蚣"
       },
@@ -27388,6 +27575,7 @@
       "filesize": 134643385,
       "identifier": "黑暗圣战录",
       "img": "IMG/TTN_SLG.CUE",
+      "lqip": -158100,
       "name": {
         "zh-Hans": "黑暗圣战录"
       },
@@ -27402,6 +27590,7 @@
       "executable": "play.bat",
       "filesize": 5250599,
       "identifier": "黑暗天使",
+      "lqip": 169250,
       "name": {
         "zh-Hans": "黑暗天使"
       },
@@ -27573,6 +27762,7 @@
       "executable": "PLAY.BAT",
       "filesize": 9581324,
       "identifier": "龙之传奇",
+      "lqip": 509024,
       "name": {
         "zh-Hans": "龙之传奇"
       },
@@ -27645,6 +27835,7 @@
       "executable": "game.exe",
       "filesize": 3793428,
       "identifier": "龙穴历险记",
+      "lqip": 229536,
       "name": {
         "zh-Hans": "龙穴历险记"
       },
@@ -27659,6 +27850,7 @@
       "executable": "timewarp.exe",
       "filesize": 3002497,
       "identifier": "龙穴历险记2",
+      "lqip": -63019,
       "name": {
         "zh-Hans": "龙穴历险记2"
       },
@@ -27729,6 +27921,7 @@
       "executable": "boot",
       "filesize": 54474268,
       "identifier": "龙霸天下",
+      "lqip": -520925,
       "name": {
         "zh-Hans": "龙霸天下"
       },
