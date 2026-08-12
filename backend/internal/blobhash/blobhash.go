@@ -141,13 +141,26 @@ func grid3x2Greyscale(img image.Image, bounds image.Rectangle, w, h int) (ca, cb
 		}
 	}
 
-	// 量化：CSS 是 X/3*60%+20%，即 [0.2,0.8] → encode: (v-0.2)/0.6*3
-	var result [6]int
+	// 动态范围归一化量化：取 6 格的 min/max，线性映射到 [0, 3]。
+	// CSS 公式 X/3*60%+20%（20%-80% lightness）不变，
+	// 但暗色图片的相对亮度差异被保留而非全黑。
+	var avgs [6]float64
 	for i := 0; i < 6; i++ {
 		if counts[i] > 0 {
-			avg := cells[i] / float64(counts[i])
-			result[i] = clampRound((avg-0.2)/0.6*3, 0, 3)
+			avgs[i] = cells[i] / float64(counts[i])
 		}
+	}
+	minVal, maxVal := avgs[0], avgs[0]
+	for _, v := range avgs {
+		if v < minVal { minVal = v }
+		if v > maxVal { maxVal = v }
+	}
+	spread := maxVal - minVal
+	if spread < 0.01 { spread = 0.01 } // 避免除零
+
+	var result [6]int
+	for i := 0; i < 6; i++ {
+		result[i] = clampRound((avgs[i]-minVal)/spread*3, 0, 3)
 	}
 
 	return result[0], result[1], result[2], result[3], result[4], result[5]
