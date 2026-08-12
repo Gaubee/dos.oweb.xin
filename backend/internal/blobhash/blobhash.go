@@ -1,17 +1,6 @@
-// Package blobhash 实现 CSS-only LQIP 编码（参考 leanrada.com/notes/css-only-lqip）。
-//
-// 把图片压缩为 20bit 整数，前端用纯 CSS mod()/pow() 解码，零 JS、零 canvas。
-//
-// 编码结构（MSB→LSB）：
-//   bits 19-18: ca (2bit)  3×2 灰度网格左上
-//   bits 17-16: cb (2bit)  3×2 灰度网格中上
-//   bits 15-14: cc (2bit)  3×2 灰度网格右上
-//   bits 13-12: cd (2bit)  3×2 灰度网格左下
-//   bits 11-10: ce (2bit)  3×2 灰度网格中下
-//   bits 9-8:   cf (2bit)  3×2 灰度网格右下
-//   bits 7-6:   ll (2bit)  主色亮度
-//   bits 5-3:   aaa (3bit) 主色 a 轴
-//   bits 2-0:   bbb (3bit) 主色 b 轴
+// 意图（2026-08-12；用户原始输入：「阅读 /tmp/lqip-handoff.md 修复算法问题」）：
+//  1. 解码图像文件为 image.Image。
+//  2. 编排 LQIP 分析并保持固定的 20bit 传输格式。
 package blobhash
 
 import (
@@ -19,11 +8,12 @@ import (
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
-	"math"
 	"os"
 )
 
-// FromFile 从图片文件生成 20bit blobhash 整数。
+const lqipOffset = 1 << 19
+
+// FromFile 从图像文件生成 CSS-only LQIP 整数。
 func FromFile(path string) (int, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -39,180 +29,31 @@ func FromFile(path string) (int, error) {
 	return Encode(img), nil
 }
 
-// Encode 把 image.Image 编码为 20bit 整数。
+// Encode 把 img 转为 CSS 解码器所需的有符号 20bit 整数。
 func Encode(img image.Image) int {
-	bounds := img.Bounds()
-	w := bounds.Dx()
-	h := bounds.Dy()
-
-	// 1. 提取主色 → Oklab → 8bit
-	// 用 6 格中色度（chroma = sqrt(a²+b²)）最大的格子的平均色作为主色，
-	// 而非全图平均色（平均色会偏中性，丢失色调）。
-	cellW := w / 3
-	if cellW < 1 { cellW = 1 }
-	cellH := h / 2
-	if cellH < 1 { cellH = 1 }
-
-	type cellAvg struct{ r, g, b, chroma float64 }
-	var cellColors [6]cellAvg
-
-	for cy := 0; cy < 2; cy++ {
-		for cx := 0; cx < 3; cx++ {
-			var sR, sG, sB float64
-			var cnt int
-			for y := bounds.Min.Y + cy*cellH; y < bounds.Min.Y+(cy+1)*cellH; y++ {
-				for x := bounds.Min.X + cx*cellW; x < bounds.Min.X+(cx+1)*cellW; x++ {
-					if x >= bounds.Max.X || y >= bounds.Max.Y { continue }
-					r, g, b, _ := img.At(x, y).RGBA()
-					sR += float64(r) / 65535.0
-					sG += float64(g) / 65535.0
-					sB += float64(b) / 65535.0
-					cnt++
-				}
-			}
-			if cnt == 0 { cnt = 1 }
-			avgR, avgG, avgB := sR/float64(cnt), sG/float64(cnt), sB/float64(cnt)
-			// 算 Oklab chroma
-			lR := srgbToLinear(avgR); lG := srgbToLinear(avgG); lB := srgbToLinear(avgB)
-			l := 0.4122214708*lR + 0.5363325363*lG + 0.0514459929*lB
-			m := 0.2119034982*lR + 0.6806995451*lG + 0.1073969566*lB
-			s := 0.0883024619*lR + 0.2817188376*lG + 0.6299787005*lB
-			l_ := math.Cbrt(l); m_ := math.Cbrt(m); s_ := math.Cbrt(s)
-			a := 1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_
-			bOk := 0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_
-			chroma := math.Sqrt(a*a + bOk*bOk)
-			idx := cy*3 + cx
-			cellColors[idx] = cellAvg{avgR, avgG, avgB, chroma}
-		}
+	if img.Bounds().Empty() {
+		return -lqipOffset
 	}
 
-	// 选色度最大的格子作为主色
-	bestIdx := 0
-	for i := 1; i < 6; i++ {
-		if cellColors[i].chroma > cellColors[bestIdx].chroma {
-			bestIdx = i
-		}
-	}
-	domR, domG, domB := cellColors[bestIdx].r, cellColors[bestIdx].g, cellColors[bestIdx].b
-	ll, aaa, bbb := rgbToOklabBits(domR, domG, domB)
+	base := representativeColour(img)
+	ll, aaa, bbb := oklabToBits(rgbToOklab(base))
+	baseL := bitsToOklab(ll, aaa, bbb).l
+	greyscale := grid3x2Greyscale(img)
 
-	// 2. 3×2 灰度网格 → 12bit
-	ca, cb, cc, cd, ce, cf := grid3x2Greyscale(img, bounds, w, h)
-
-	// 3. 位打包 + 减去 2^19 偏移（CSS 解码时 +pow(2,19) 恢复）
-	result := ca<<18 | cb<<16 | cc<<14 | cd<<12 | ce<<10 | cf<<8 | ll<<6 | aaa<<3 | bbb
-	return result - (1 << 19)
+	packed := packLQIP(greyscale, baseL, ll, aaa, bbb)
+	// CSS 解码前会加 pow(2, 19)，这里保留有符号形式。
+	return packed - lqipOffset
 }
 
-// rgbToOklabBits 把 sRGB [0,1] 转 Oklab，量化为 8bit（2+3+3）。
-func rgbToOklabBits(r, g, b float64) (ll, aaa, bbb int) {
-	// sRGB → linear
-	r = srgbToLinear(r)
-	g = srgbToLinear(g)
-	b = srgbToLinear(b)
-
-	// linear RGB → LMS
-	l := 0.4122214708*r + 0.5363325363*g + 0.0514459929*b
-	m := 0.2119034982*r + 0.6806995451*g + 0.1073969566*b
-	s := 0.0883024619*r + 0.2817188376*g + 0.6299787005*b
-
-	// cube root
-	l_ := math.Cbrt(l)
-	m_ := math.Cbrt(m)
-	s_ := math.Cbrt(s)
-
-	// LMS → Oklab
-	L := 0.2104542553*l_ + 0.7936177850*m_ - 0.0040720468*s_
-	a := 1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_
-	bOklab := 0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_
-
-	// 量化（与 CSS 解码公式互逆）
-	// CSS: ll/3*0.6+0.2 → encode: (L-0.2)/0.6*3
-	ll = clampRound((L-0.2)/0.6*3, 0, 3)
-	// CSS: aaa/8*0.7-0.35 → encode: (a+0.35)/0.7*8
-	aaa = clampRound((a+0.35)/0.7*8, 0, 7)
-	// CSS: (bbb+1)/8*0.7-0.35 → encode: (b+0.35)/0.7*8-1
-	bbb = clampRound((bOklab+0.35)/0.7*8-1, 0, 7)
-
-	return ll, aaa, bbb
-}
-
-// grid3x2Greyscale 把图片分为 3×2 网格，每格取平均灰度，量化为 2bit。
-// 网格顺序与 CSS radial-gradient 一致：
-//
-//	ca | cb | cc
-//	cd | ce | cf
-func grid3x2Greyscale(img image.Image, bounds image.Rectangle, w, h int) (ca, cb, cc, cd, ce, cf int) {
-	cellW := w / 3
-	if cellW < 1 {
-		cellW = 1
-	}
-	cellH := h / 2
-	if cellH < 1 {
-		cellH = 1
-	}
-
-	var cells [6]float64
-	var counts [6]int
-
-	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			r, g, b, _ := img.At(x, y).RGBA()
-			brightness := (0.299*float64(r) + 0.587*float64(g) + 0.114*float64(b)) / 65535.0
-
-			cx := (x - bounds.Min.X) / cellW
-			cy := (y - bounds.Min.Y) / cellH
-			if cx > 2 {
-				cx = 2
-			}
-			if cy > 1 {
-				cy = 1
-			}
-			idx := cy*3 + cx
-			cells[idx] += brightness
-			counts[idx]++
-		}
-	}
-
-	// 动态范围归一化量化：取 6 格的 min/max，线性映射到 [0, 3]。
-	// CSS 公式 X/3*60%+20%（20%-80% lightness）不变，
-	// 但暗色图片的相对亮度差异被保留而非全黑。
-	var avgs [6]float64
-	for i := 0; i < 6; i++ {
-		if counts[i] > 0 {
-			avgs[i] = cells[i] / float64(counts[i])
-		}
-	}
-	minVal, maxVal := avgs[0], avgs[0]
-	for _, v := range avgs {
-		if v < minVal { minVal = v }
-		if v > maxVal { maxVal = v }
-	}
-	spread := maxVal - minVal
-	if spread < 0.01 { spread = 0.01 } // 避免除零
-
-	var result [6]int
-	for i := 0; i < 6; i++ {
-		result[i] = clampRound((avgs[i]-minVal)/spread*3, 0, 3)
-	}
-
-	return result[0], result[1], result[2], result[3], result[4], result[5]
-}
-
-func srgbToLinear(c float64) float64 {
-	if c <= 0.04045 {
-		return c / 12.92
-	}
-	return math.Pow((c+0.055)/1.055, 2.4)
-}
-
-func clampRound(v float64, min, max int) int {
-	r := int(math.Round(v))
-	if r < min {
-		return min
-	}
-	if r > max {
-		return max
-	}
-	return r
+func packLQIP(greyscale [6]float64, baseL float64, ll, aaa, bbb int) int {
+	values := quantizeGreyscale(greyscale, baseL)
+	return values[0]<<18 |
+		values[1]<<16 |
+		values[2]<<14 |
+		values[3]<<12 |
+		values[4]<<10 |
+		values[5]<<8 |
+		ll<<6 |
+		aaa<<3 |
+		bbb
 }

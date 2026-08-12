@@ -67,6 +67,9 @@ export function Pagination({ page, totalPages, onPage }: Props) {
             placeholder={String(page)}
           />
           <span>页</span>
+          <Button size="sm" variant="outline" className="h-8" disabled={!jump} onClick={onJump}>
+            Go
+          </Button>
         </div>
       )}
     </div>
