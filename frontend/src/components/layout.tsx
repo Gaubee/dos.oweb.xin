@@ -21,7 +21,7 @@ interface NavItem {
 // `as const` 保证 `to` 为字面量联合，TanStack Router Link 强类型校验通过。
 const NAV_ITEMS = [
   { to: '/', label: '首页', icon: Home, match: (p: string) => p === '/' },
-  { to: '/games', label: '游戏列表', icon: List, match: (p: string) => p.startsWith('/games') },
+  { to: '/games', label: '游戏列表', icon: List, match: (p: string) => p === '/games' },
   { to: '/library', label: '我的游戏库', icon: Library, match: (p: string) => p.startsWith('/library') },
 ] satisfies NavItem[];
 
