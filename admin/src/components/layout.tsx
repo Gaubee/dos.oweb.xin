@@ -13,7 +13,6 @@ import { useAuth } from '@/lib/auth-context';
 
 const NAV: { to: string; label: string }[] = [
   { to: '/games', label: '游戏管理' },
-  { to: '/hidden', label: '下架管理' },
   { to: '/featured', label: '推荐' },
   { to: '/types', label: '类型' },
   { to: '/mirrors', label: '镜像源' },

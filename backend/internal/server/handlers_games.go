@@ -70,9 +70,21 @@ func matchSearch(g model.RawGame, q string) bool {
 
 // ———— 管理接口 ————
 
-// GET /api/admin/games  管理列表（与公开列表一致，但路径在鉴权组下）。
+// GET /api/admin/games  管理列表（含下架游戏，不过滤 hidden）。
 func (s *Server) handleAdminListGames(c *gin.Context) {
-	s.handleListGames(c)
+	q := strings.ToLower(strings.TrimSpace(c.Query("q")))
+	all := s.store.ListAllGames() // 管理后台看全部（含下架）
+	if q != "" {
+		filtered := make([]model.RawGame, 0)
+		for _, g := range all {
+			if matchSearch(g, q) {
+				filtered = append(filtered, g)
+			}
+		}
+		c.JSON(http.StatusOK, gin.H{"total": len(filtered), "games": filtered})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"total": len(all), "games": all})
 }
 
 // POST /api/admin/games  新增游戏。

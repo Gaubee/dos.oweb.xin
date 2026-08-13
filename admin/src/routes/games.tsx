@@ -194,9 +194,14 @@ export function GamesListPage() {
       <div className="flex flex-wrap items-center gap-3">
         <h1 className="text-xl font-semibold">游戏管理</h1>
         <Badge variant="secondary">{filtered.length} 款 / 共 {data?.total ?? 0}</Badge>
-        <Button size="sm" className="ml-auto" onClick={() => void navigate({ to: '/games/new' })}>
-          <Plus className="h-4 w-4" /> 新增游戏
-        </Button>
+        <div className="ml-auto flex gap-2">
+          <Button size="sm" variant="outline" onClick={() => void navigate({ to: '/hidden' })}>
+            <EyeOff className="h-4 w-4" /> 下架管理
+          </Button>
+          <Button size="sm" onClick={() => void navigate({ to: '/games/new' })}>
+            <Plus className="h-4 w-4" /> 新增游戏
+          </Button>
+        </div>
       </div>
 
       {/* 搜索框 */}
