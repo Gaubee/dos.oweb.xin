@@ -24,6 +24,7 @@ services:
       ADMIN_DIST: /app/admin/dist
       PUBLISH_HOOK: "${PUBLISH_HOOK:-}"
     volumes:
+      # 空挂载（bind mount / 预建卷）由镜像 entrypoint 自愈填充种子数据
       - admin-data:/app/frontend/public
       - frontend-dist:/app/frontend/dist
     restart: unless-stopped

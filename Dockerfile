@@ -7,8 +7,8 @@
 #
 # 产物：
 #   /app/dos-admin        Go 二进制（含 admin SPA + API + 封面 + 自托管 zip）
-#   /app/frontend/public  游戏数据（games.json + covers + emularity）
-#   /app/frontend/dist    公开站 PWA 产物（如需单独部署）
+#   /app/seed/            种子数据（public 游戏数据 + dist PWA 产物）
+#   /app/frontend/public  运行时数据目录（entrypoint 从 seed 自愈拷入后可被挂载卷覆盖）
 
 # —— Stage 1: 构建 frontend (PWA) ——
 FROM node:22-slim AS frontend-builder
@@ -48,11 +48,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Go 二进制
 COPY --from=go-builder /app/dos-admin ./dos-admin
 
-# 前端数据（games.json + covers + emularity）
-COPY frontend/public ./frontend/public
-
-# 前端构建产物（供 PackageDist 打包用）
-COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
+# 种子数据：挂载点（/app/frontend/public、/app/frontend/dist）为空时，
+# 由 docker-entrypoint.sh 启动自愈拷入（bind mount / 预建卷场景）
+COPY frontend/public /app/seed/public
+COPY --from=frontend-builder /app/frontend/dist /app/seed/dist
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Admin SPA 产物（Go 运行时也可从磁盘读）
 COPY --from=admin-builder /app/admin/dist ./admin/dist
@@ -69,5 +70,5 @@ EXPOSE 7780
 
 # 无外部工具可用时不设 HEALTHCHECK（compose 用 service_started 依赖）
 
-ENTRYPOINT ["./dos-admin"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["--addr=:7780"]
