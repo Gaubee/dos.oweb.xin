@@ -15,7 +15,10 @@ services:
       - "${ADMIN_PORT:-7780}:7780"
     environment:
       ADMIN_ADDR: ":7780"
-      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-admin}"
+      # 必填：未设置或为空时 compose 直接报错拒启（:? 校验）
+      # 1Panel 部署：.env 与 compose 同目录，如 /opt/1panel/docker/compose/<名称>/.env
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:?请在 .env 中设置 ADMIN_PASSWORD（管理密码），参考 .env.example}"
+      # 可选：HMAC 签名密钥，留空则每次启动随机生成（重启后需重新登录）
       ADMIN_SECRET: "${ADMIN_SECRET:-}"
       DATA_DIR: /app/frontend/public
       ADMIN_DIST: /app/admin/dist
