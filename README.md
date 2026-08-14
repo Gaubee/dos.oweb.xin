@@ -1,4 +1,4 @@
-# dos.oweb.xin
+# game.oweb.xin
 
 中文 DOS 游戏在线游玩平台 + 管理后台。复刻自 [rwv/chinese-dos-games-web](https://github.com/rwv/chinese-dos-games-web)。
 
@@ -70,6 +70,17 @@ PWA 公开站（game.oweb.xin）+ Go 管理后台（admin.game.oweb.xin）双工
 ```
 
 ## 部署
+
+### Docker（管理后台，推荐）
+
+镜像由 GitHub Actions 自动构建并发布到 ghcr.io（`master` → `latest`，`v*` tag → 版本号）：
+
+```bash
+cp .env.example .env   # 按需修改密码/端口
+docker compose pull && docker compose up -d
+```
+
+本地源码构建（不使用 CI 镜像）：`docker compose up -d --build`
 
 ### game.oweb.xin（公开站）
 `frontend/dist/` 部署到任意静态主机（Cloudflare Pages / nginx），需 SPA fallback。

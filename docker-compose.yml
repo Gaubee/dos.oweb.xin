@@ -1,12 +1,14 @@
 # docker-compose.yml
 #
 # 用法：
-#   docker compose up -d
+#   docker compose pull && docker compose up -d   # 使用 CI 发布的 ghcr 镜像
+#   docker compose up -d --build                  # 本地改动后从源码构建
 #
 # 环境变量通过 .env 文件配置（参考 .env.example）
 
 services:
   admin:
+    image: ghcr.io/gaubee/game.oweb.xin:latest
     build: .
     container_name: dos-admin
     ports:

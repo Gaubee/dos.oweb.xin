@@ -3,6 +3,7 @@
 # 用法：
 #   docker build -t dos-oweb-xin .
 #   docker run -p 7780:7780 -e ADMIN_PASSWORD=xxx dos-oweb-xin
+#   CI 自动构建推送：ghcr.io/gaubee/game.oweb.xin（.github/workflows/docker-publish.yml）
 #
 # 产物：
 #   /app/dos-admin        Go 二进制（含 admin SPA + API + 封面 + 自托管 zip）
